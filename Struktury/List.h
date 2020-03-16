@@ -36,9 +36,12 @@ public:
 
 	void pushBack(const Typ& newElement)
 	{
-		Node<Typ>* ptr = head;
+		Node<Typ>* ptr = head; 
+		/*Jeśli head nic nie wskazuje to pushBack tworzy pierwszy elemnt listy*/
 		if (head == NULL)
 			head = new Node<Typ>(newElement);
+
+		/*dochodzimy do momentu kiedy cześć next danego elemtu listy jest NULL i wtedy przypisujemy ten wskaźnik do naszego nowego Noda*/
 		else
 		{
 			while (ptr->next != NULL)
@@ -64,7 +67,22 @@ public:
 	}
 
 
-	//void insert(const Typ& newElement, int index);
+	void insert(const Typ& newElement, int index)
+	{
+		Node<Typ>* nowy = new Node<Typ>(newElement);
+		Node<Typ>* ptr = head;
+		Node<Typ>* temp;
+
+		while(ptr != (head + index))
+		{
+			ptr = ptr->next;
+		}
+		temp = ptr->next;
+		ptr->next = nowy;
+		nowy->next = temp;
+	}
+
+
 	void remove(const Typ& element)
 	{
 		Node<Typ>* tempNEXT, * temp;
@@ -72,7 +90,9 @@ public:
 		temp = head;
 		
 		tempNEXT = head->next;
-
+		
+		/*przypadek dla pierwszego elementu*/
+		
 		if (temp->data == element)
 		{
 			head = tempNEXT;
@@ -82,18 +102,19 @@ public:
 
 		else
 		{
+			/*poruszanie się po liście*/
 			while (tempNEXT->data != element)
 			{
 				tempNEXT = tempNEXT->next;
 				temp = temp->next;
 			}
-
+			/*przypadek dla ostatniego elementu*/
 			if (tempNEXT->next == NULL)
 			{
 				temp->next = NULL;
 				delete(tempNEXT);
 			}
-
+			/*przypadek dla elementu w środku*/
 			else
 			{
 				temp->next = tempNEXT->next;
