@@ -189,38 +189,3 @@ Typ& List<Typ>::operator [](int index)
 
 
 
-/*template<typename Typ>
-class List<Typ>::Iterator
-{
-public:
-	Node<Typ>* current;
-
-
-	Iterator(Node<Typ>* ptr)
-	{
-		current = ptr;
-	}
-
-	Iterator& operator++()
-	{
-		current = current->next;
-		return *this;
-	}
-
-	bool operator!=(const Iterator& iterator)
-	{
-		return current != iterator.current;
-	}
-
-	Iterator& operator=(Node<Typ>* ptr)
-	{
-		this-current = ptr;
-		return *this;
-	}
-
-	Typ& operator *()
-	{
-		return current->data;
-	}
-
-};*/
