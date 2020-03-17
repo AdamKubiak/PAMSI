@@ -8,10 +8,12 @@ using namespace std;
 template<typename Typ>
 class List
 {
-	
-public:
-	Node<Typ>* head;
+private:
 	int size;
+public:
+	class Iterator;
+	Node<Typ>* head;
+	
 
 	List();
 	~List();
@@ -21,14 +23,29 @@ public:
 	void insert(const Typ& newElement, int index);
 	void remove(const Typ& element);
 	void DisplayList();
-	Typ& operator [] (int index);
+	Typ& operator[] (int index);
+	Iterator begin();
+	Iterator end();
+	
+
+	struct Iterator
+	{
+		Node<Typ>* Iter;
+
+		Iterator()
+		{
+			Iter = NULL;
+		}
+
+		Iterator(Node<Typ>* nod)
+		{
+			Iter = nod;
+		}
+
+
+
+	};
 };
-
-
-
-
-
-
 
 template<typename Typ>
 List<Typ>::List()
@@ -188,4 +205,21 @@ Typ& List<Typ>::operator [](int index)
 }
 
 
+template<typename Typ>
+typename List<Typ>::Iterator List<Typ>::begin()
+{
+	return Iter(head);
+}
 
+template<typename Typ>
+typename List<Typ>::Iterator List<Typ>::end()
+{
+	Node<Typ>* temp = head;
+
+	while (temp->data != NULL)
+	{
+		temp = temp->next;
+	}
+
+	return temp;
+}

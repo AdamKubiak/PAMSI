@@ -16,6 +16,7 @@ int main()
 	kontener->pushFront(b);
 	kontener->pushBack(a);
 	kontener->insert(c, 1);
+	(*kontener)[0] = 5;
 	kontener->DisplayList();
 	cout << endl;
 	
