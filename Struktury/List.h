@@ -42,8 +42,32 @@ public:
 			Iter = nod;
 		}
 
+		Iterator& operator ++()
+		{
+			Iter = Iter->next;
+			return *this;
+		}
 
+		bool operator != (Iterator const& diff) const
+		{
+			return Iter!=diff.Iter;
+		}
 
+		bool operator == (Iterator const& diff) const
+		{
+			return !(Iter != diff);
+		}
+
+		Iterator& operator = (const Iterator& diff)
+		{
+			Iter = diff.Iter;
+			return Iter;
+		}
+
+		Iterator& operator *()
+		{
+			return Iter->data;
+		}
 	};
 };
 
@@ -192,6 +216,7 @@ Typ& List<Typ>::operator [](int index)
 	if (index >= size || index < 0) 
 	{
 		cout << ("Podany indeks nie istnieje") << endl;
+		
 	}
 
 	else
@@ -216,7 +241,7 @@ typename List<Typ>::Iterator List<Typ>::end()
 {
 	Node<Typ>* temp = head;
 
-	while (temp->data != NULL)
+	while (temp->next != NULL)
 	{
 		temp = temp->next;
 	}

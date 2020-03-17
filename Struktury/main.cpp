@@ -19,7 +19,12 @@ int main()
 	(*kontener)[0] = 5;
 	kontener->DisplayList();
 	cout << endl;
+
 	
+	cout << (*kontener)[2] << endl;
+
+	for (auto it = kontener->begin(); it != kontener->end(); ++it)
+		std::cout << *it << "  ";
 	
 	kontener->~List();
 	
