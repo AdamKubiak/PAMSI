@@ -34,18 +34,16 @@ public:
 
 		Iterator()
 		{
-			Iter = NULL;
+			Iter();
 		}
 
-		Iterator(Node<Typ>* nod)
-		{
-			Iter = nod;
-		}
+		Iterator(Node<Typ>* nod) : Iter(nod) {};
 
-		Iterator& operator ++()
+		void operator ++()
 		{
+			
 			Iter = Iter->next;
-			return *this;
+
 		}
 
 		bool operator != (Iterator const& diff) const
@@ -55,7 +53,8 @@ public:
 
 		bool operator == (Iterator const& diff) const
 		{
-			return !(Iter != diff);
+			
+			return Iter == diff.Iter;
 		}
 
 		Iterator& operator = (const Iterator& diff)
@@ -64,16 +63,18 @@ public:
 			return Iter;
 		}
 
-		Iterator& operator *()
+		Typ& operator *()
 		{
 			return Iter->data;
 		}
+
 	};
 };
 
 template<typename Typ>
 List<Typ>::List()
 {
+	size = 0;
 	head = NULL;
 }
 
@@ -215,7 +216,7 @@ Typ& List<Typ>::operator [](int index)
 
 	if (index >= size || index < 0) 
 	{
-		cout << ("Podany indeks nie istnieje") << endl;
+		throw std::invalid_argument("Podany indeks nie istnieje");
 		
 	}
 
@@ -233,7 +234,7 @@ Typ& List<Typ>::operator [](int index)
 template<typename Typ>
 typename List<Typ>::Iterator List<Typ>::begin()
 {
-	return Iter(head);
+	return Iterator(head);
 }
 
 template<typename Typ>
@@ -246,5 +247,5 @@ typename List<Typ>::Iterator List<Typ>::end()
 		temp = temp->next;
 	}
 
-	return temp;
+	return temp->next;
 }

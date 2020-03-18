@@ -24,11 +24,12 @@ int main()
 	cout << (*kontener)[2] << endl;
 
 	for (auto it = kontener->begin(); it != kontener->end(); ++it)
-		std::cout << *it << "  ";
+		std::cout << *it << " ";
+		cout << endl;
 	
 	kontener->~List();
 	
-	cout << endl;
+	
 
 
 	return 0;
