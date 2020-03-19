@@ -1,22 +1,20 @@
 #include "List.h"
-
+#include "Stack.h"
 int main()
 {
+	cout << "---------------* LISTA *---------------" << endl;
 	List<int>* kontener = new List<int>();
 
-	int a = 1;
-	int b = 2;
-	int c = 3;
-
-	kontener->pushBack(c);
-	kontener->pushBack(a);
-	kontener->pushBack(a);
-	kontener->remove(c);
-	kontener->pushBack(a);
-	kontener->pushFront(b);
-	kontener->pushBack(a);
-	kontener->insert(c, 1);
+	kontener->pushBack(3);
+	kontener->pushBack(1);
+	kontener->pushBack(1);
+	kontener->pushBack(3);
+	kontener->pushBack(1);
+	kontener->pushFront(2);
+	kontener->pushBack(1);
+	kontener->insert(3, 1);
 	(*kontener)[0] = 5;
+	kontener->remove(3);
 	kontener->DisplayList();
 	cout << endl;
 
@@ -27,9 +25,31 @@ int main()
 		std::cout << *it << " ";
 		cout << endl;
 	
-	kontener->~List();
-	
-	
+		delete kontener;
+
+		cout << endl;
+
+		cout << "---------------* STOS *----------------" << endl;
+
+		Stack<int>* stack = new Stack<int>();
+
+		stack->push(1);
+		stack->push(2);
+		stack->push(3);
+		std::cout << "stos: ";
+		stack->display();
+		std::cout << "pop: " << stack->pop() << std::endl;
+		std::cout << "stos po popie: ";
+		stack->display();
+		std::cout << "pop: " << stack->pop() << std::endl;
+		std::cout << "stos po popie: ";
+		stack->display();
+		std::cout << "pop: " << stack->pop() << std::endl;
+		std::cout << "stos po popie: ";
+		stack->display();
+		delete stack;
+
+
 
 
 	return 0;

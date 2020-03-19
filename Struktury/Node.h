@@ -14,8 +14,7 @@ public:
 	}
 
 	Node()
-	{
-		data = NULL;
+	{	
 		next = NULL;
 	}
 };

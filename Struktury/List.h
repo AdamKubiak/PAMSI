@@ -30,14 +30,19 @@ public:
 
 	struct Iterator
 	{
+
+		using difference_type = std::size_t;
+		using value_type = Typ;
+		using reference = Typ&;
+		using pointer = Typ*;
+		using iterator_category = std::input_iterator_tag;
+
+
 		Node<Typ>* Iter;
 
-		Iterator()
-		{
-			Iter();
-		}
+		
 
-		Iterator(Node<Typ>* nod) : Iter(nod) {};
+		Iterator(Node<Typ>* nod = nullptr) : Iter(nod) {};
 
 		void operator ++()
 		{
@@ -156,44 +161,33 @@ void List<Typ>::insert(const Typ& newElement, int index)
 template<typename Typ>
 void List<Typ>::remove(const Typ& element)
 {
-	Node<Typ>* tempNEXT, * temp;
-
-	temp = head;
-
-	tempNEXT = head->next;
-
-	/*przypadek dla pierwszego elementu*/
-
-	if (temp->data == element)
+	Node<Typ>* node = head;
+	Node<Typ>* preNode = nullptr;
+	Node<Typ>* postNode = nullptr;
+	if (head != nullptr)
 	{
-		head = tempNEXT;
-
-		delete(temp);
-	}
-
-	else
-	{
-		/*poruszanie siê po liœcie*/
-		while (tempNEXT->data != element)
+		if (head->data == element)
 		{
-			tempNEXT = tempNEXT->next;
-			temp = temp->next;
+			postNode = head->next;
+			delete head;
+			head = postNode;
 		}
-		/*przypadek dla ostatniego elementu*/
-		if (tempNEXT->next == NULL)
-		{
-			temp->next = NULL;
-			delete(tempNEXT);
-		}
-		/*przypadek dla elementu w œrodku*/
 		else
 		{
-			temp->next = tempNEXT->next;
-			delete(tempNEXT);
+			while (node->next != nullptr)
+			{
+				preNode = node;
+				node = node->next;
+				if (node != nullptr && node->data == element)
+				{
+					postNode = node->next;
+					delete node;
+					preNode->next = postNode;
+					node = preNode;
+				}
+			}
 		}
 	}
-
-	size--;
 }
 
 template<typename Typ>
@@ -237,15 +231,9 @@ typename List<Typ>::Iterator List<Typ>::begin()
 	return Iterator(head);
 }
 
+
 template<typename Typ>
 typename List<Typ>::Iterator List<Typ>::end()
 {
-	Node<Typ>* temp = head;
-
-	while (temp->next != NULL)
-	{
-		temp = temp->next;
-	}
-
-	return temp->next;
+	return Iterator(nullptr);
 }
