@@ -190,6 +190,7 @@ void List<Typ>::remove(const Typ& element)
 	}
 }
 
+
 template<typename Typ>
 void List<Typ>::DisplayList()
 {

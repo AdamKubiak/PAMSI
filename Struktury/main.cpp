@@ -1,5 +1,6 @@
 #include "List.h"
 #include "Stack.h"
+#include "Queue.h"
 int main()
 {
 	cout << "---------------* LISTA *---------------" << endl;
@@ -48,6 +49,21 @@ int main()
 		std::cout << "stos po popie: ";
 		stack->display();
 		delete stack;
+
+		cout << "---------------* QUEUE *----------------" << endl;
+
+		Queue<int>* queue = new Queue<int>();
+
+		queue->enqueue(1);
+		queue->enqueue(2);
+		queue->enqueue(3);
+
+		for (int i = 0; i < 3; i++)
+		{
+			cout << queue->dequeue() << endl;
+		}
+
+		
 
 
 
