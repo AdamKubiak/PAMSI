@@ -17,6 +17,7 @@ public:
 	
 
 	List();
+	List(const List<Typ>* list);
 	~List();
 
 	void pushBack(const Typ& newElement);
@@ -29,7 +30,7 @@ public:
 	Iterator end();
 	ConstIterator cbegin() const;
 	ConstIterator cend() const;
-	
+	List<Typ>& operator = (const List& lista);
 
 	struct Iterator
 	{
@@ -109,6 +110,13 @@ List<Typ>::List()
 {
 	size = 0;
 	head = NULL;
+}
+
+template<typename Typ>
+List<Typ>::List(const List<Typ>* list)
+{
+	head = list->head;
+	size = list->size;
 }
 
 template<typename Typ>
@@ -274,8 +282,16 @@ typename List<Typ>::ConstIterator List<Typ>::cbegin() const
 	return ConstIterator(head);
 }
 
-template<class Typ>
+template<typename Typ>
 typename List<Typ>::ConstIterator List<Typ>::cend() const
 {
 	return ConstIterator(nullptr);
+}
+
+template<typename Typ>
+List<Typ>& List<Typ>::operator =(const List& lista)
+{
+	head = lista.head;
+	size = lista.size;
+	return this;
 }

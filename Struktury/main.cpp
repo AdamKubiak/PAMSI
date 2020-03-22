@@ -26,9 +26,20 @@ int main()
 	for (auto it = kontener->cbegin(); it != kontener->cend(); ++it)
 		std::cout << *it << " ";
 		cout << endl;
-	
-		delete kontener;
 
+		List<int>* kopia = new List<int>(kontener);
+
+		for (auto it = kopia->cbegin(); it != kopia->cend(); ++it)
+			std::cout << *it << " ";
+		cout << endl;
+
+		List<int>* copy = kontener;
+
+		for (auto it = copy->cbegin(); it != copy->cend(); ++it)
+			std::cout << *it << " ";
+		cout << endl;
+		
+		delete kontener;
 		cout << endl;
 
 		cout << "---------------* STOS *----------------" << endl;
