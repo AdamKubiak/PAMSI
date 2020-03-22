@@ -23,7 +23,7 @@ int main()
 	
 	cout << (*kontener)[2] << endl;
 
-	for (auto it = kontener->begin(); it != kontener->end(); ++it)
+	for (auto it = kontener->cbegin(); it != kontener->cend(); ++it)
 		std::cout << *it << " ";
 		cout << endl;
 	

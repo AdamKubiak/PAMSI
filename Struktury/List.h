@@ -12,6 +12,7 @@ private:
 	int size;
 public:
 	class Iterator;
+	class ConstIterator;
 	Node<Typ>* head;
 	
 
@@ -26,6 +27,8 @@ public:
 	Typ& operator[] (int index);
 	Iterator begin();
 	Iterator end();
+	ConstIterator cbegin() const;
+	ConstIterator cend() const;
 	
 
 	struct Iterator
@@ -73,6 +76,31 @@ public:
 			return Iter->data;
 		}
 
+	};
+
+	struct ConstIterator
+	{
+		Node<Typ>* Iter;
+
+		ConstIterator(Node<Typ>* nod = nullptr) : Iter(nod) {};
+
+		void operator++()
+		{
+			if (Iter != nullptr)
+			Iter = Iter->next;
+			else
+				throw std::invalid_argument("Out of range");
+
+		}
+		bool operator != (ConstIterator const& diff) const
+		{
+			return Iter != diff.Iter;
+		}
+
+		Typ& operator*()
+		{
+			return Iter->data;
+		}
 	};
 };
 
@@ -237,4 +265,17 @@ template<typename Typ>
 typename List<Typ>::Iterator List<Typ>::end()
 {
 	return Iterator(nullptr);
+}
+
+
+template<typename Typ>
+typename List<Typ>::ConstIterator List<Typ>::cbegin() const
+{
+	return ConstIterator(head);
+}
+
+template<class Typ>
+typename List<Typ>::ConstIterator List<Typ>::cend() const
+{
+	return ConstIterator(nullptr);
 }
