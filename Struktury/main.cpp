@@ -3,6 +3,10 @@
 #include "Queue.h"
 #include "PriorityQueue.h"
 #include "Map.h"
+#include <stack>
+#include <queue>
+#include <list>
+#include <iterator>
 
 int main()
 {
@@ -182,6 +186,76 @@ int main()
 		delete mapSTRINGOP;
 
 
+		cout << "-----------------------* STL *----------------------" << endl;
+		cout << '.' << endl << '.' << endl << '.' << endl;
+		cout << "---------------* LISTA *---------------" << endl;
+		std::list<int> list;
+		list.push_back(1);
+		list.push_back(2);
+		list.push_back(3);
+		list.push_front(5);
+		list.push_front(3);
+		auto it = list.begin();
+		std::advance(it, 2); // przesuwa iterator o 2
+		list.insert(it, 9);
+
+		std::copy(list.begin(), list.end(), std::ostream_iterator<int>(std::cout, " "));
+
+		cout << endl << endl;
+
+		for (auto it = list.begin(); it != list.end(); ++it) // dodaje za pomoca iteratora do kazdego elementu 1
+			*it += 1;
+
+		std::copy(list.begin(), list.end(), std::ostream_iterator<int>(std::cout, " "));
+
+		cout << endl << endl;
+
+		list.remove(4);   // usuwa wszystkie 4
+		std::copy(list.begin(), list.end(), std::ostream_iterator<int>(std::cout, " "));
+		cout << endl;
+
+		cout << "---------------* STOS *----------------" << endl;
+		std::stack<int> stack;
+		stack.push(1);
+		stack.push(2);
+		stack.push(3);
+
+		cout << stack.top() << " ";
+		stack.pop();
+
+		cout << stack.top() << " ";
+		stack.pop();
+
+		cout << stack.top() <<endl;
+		stack.pop();
+		cout << "---------------* QUEUE *----------------" << endl;
+		std::queue<int> kolejka;
+		kolejka.push(1);
+		kolejka.push(2);
+		kolejka.push(3);
+
+		std::cout << kolejka.front() << " ";
+		kolejka.pop();
+
+		std::cout << kolejka.front() << " ";
+		kolejka.pop();
+
+		cout << kolejka.front() << endl;
+		kolejka.pop();
+		cout << "-----------* PriorityQueue *------------" << endl;
+		std::priority_queue<int> kolejkaP;
+		kolejkaP.push(3);
+		kolejkaP.push(5);
+		kolejkaP.push(1);
+
+		cout << kolejkaP.top() << " ";
+		kolejkaP.pop();
+
+		cout << kolejkaP.top() << " ";
+		kolejkaP.pop();
+
+		cout << kolejkaP.top() <<endl;
+		kolejkaP.pop();
 
 	return 0;
 
