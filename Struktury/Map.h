@@ -26,7 +26,7 @@ template<typename KeyType, typename ValueType>
 Map<KeyType, ValueType>::Map()
 {
 	kontener = new List<ValueType>();
-	for (int i = 0; i < quantity; i++)  //konstruktor robi 'kontener' 11 elementÃ³w z NULL korzystajac z pushBack listy
+	for (int i = 0; i < quantity; i++)  //konstruktor robi 'kontener' 11 elementów z NULL korzystajac z pushBack listy
 		kontener->pushBack(NULL);  
 }
 template<typename KeyType, typename ValueType>
