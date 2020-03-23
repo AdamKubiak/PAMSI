@@ -40,7 +40,7 @@ int main()
 		delete Lista;
 		delete ListaOP;
 		delete ListaKO;
-		cout << endl;
+		cout <<"Listy zostaly usuniete"<< endl;
 
 		cout << "---------------* STOS *----------------" << endl;
 
