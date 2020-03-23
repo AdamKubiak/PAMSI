@@ -196,7 +196,6 @@ int main()
 		list.push_front(5);
 		list.push_front(3);
 		auto it = list.begin();
-		std::advance(it, 2); // przesuwa iterator o 2
 		list.insert(it, 9);
 
 		std::copy(list.begin(), list.end(), std::ostream_iterator<int>(std::cout, " "));
