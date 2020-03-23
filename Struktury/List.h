@@ -115,13 +115,19 @@ List<Typ>::List()
 template<typename Typ>
 List<Typ>::List(const List<Typ>* list)
 {
-	head = list->head;
+	Node<Typ>* ptr = list->head;
 	size = list->size;
+
+	while (ptr != NULL)
+	{
+		this->pushBack(ptr->data);
+		ptr = ptr->next;
+	}
 }
 
 template<typename Typ>
 List<Typ>::~List() {
-	while (head->next != nullptr) {
+	while (head != nullptr) {
 		Node<Typ>* temp = head;
 		head = head->next;
 		delete temp;
@@ -291,7 +297,21 @@ typename List<Typ>::ConstIterator List<Typ>::cend() const
 template<typename Typ>
 List<Typ>& List<Typ>::operator =(const List& lista)
 {
-	head = lista.head;
-	size = lista.size;
-	return this;
+	Node<Typ>* node = this->head;
+	Node<Typ>* deleteNode = this->head;
+
+	while (node != nullptr)
+	{
+		node = node->next;
+		delete deleteNode;
+		deleteNode = node;
+	}
+
+	node = lista.head;
+	while (node != nullptr)
+	{
+		this->pushBack(node->data);
+		node = node->next;
+	}
+	return *this;
 }

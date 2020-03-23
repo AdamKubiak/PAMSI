@@ -1,63 +1,66 @@
 #pragma once
 #include <iostream>
 #include "Node.h"
+#include "List.h"
 using namespace std;
 
 template < typename Typ>
 class Stack
 {
-	Node<Typ>* top;
+	List<Typ>* top;
 public:
 	Stack();
+	Stack(Stack<Typ>* stack);
 	~Stack();
 	void push(const Typ& newElement);
 	Typ pop();
-	void display() const;
+	void DisplayStack() const;
+	Stack<Typ>& operator = (const Stack<Typ>& stack);
 };
 
 template<typename Typ>
 Stack<Typ>::Stack()
 {
-	top = nullptr;
+	top = new List<Typ>();
+}
+
+template<typename Typ>
+Stack<Typ>::Stack(Stack<Typ>* stack)
+{
+	this->top = new List<Typ>(stack->top);
 }
 
 template<typename Typ>
 Stack<Typ>::~Stack()
 {
-	while (top)
-	{
-		Node<Typ>* next = top->next;
-		delete top;
-		top = next;
-	}
+	delete top;
 	cout << "Stos zostal usuniety" << endl;
 }
-
 template<typename Typ>
 void Stack<Typ>::push(const Typ& newElement)
 {
 	Node<Typ>* node = new Node<Typ>(newElement);
 
-	if (!top)
+	if (!top->head)
 	{
-		top = node; // pierwszy element stacka
+		top->head = node; // pierwszy element stacka
 	}
 
 	else
 	{
-		node->next = top;// wskaznik na to co lezy pod nowym nodem
-		top = node; // top wskazuje na nowego noda
+		node->next = top->head;// wskaznik na to co lezy pod nowym nodem
+		top->head = node; // top wskazuje na nowego noda
 	}
 }
 
 template<typename Typ>
 Typ Stack<Typ>::pop()
 {
-	if (top)
+	if (top->head)
 	{
-		Node<Typ>* node = top;
+		Node<Typ>* node = top->head;
 		Typ data = node->data;
-		top = node->next;
+		top->head = node->next;
 		delete node;
 		return data;
 	}
@@ -68,9 +71,9 @@ Typ Stack<Typ>::pop()
 }
 
 template<typename Typ>
-void Stack<Typ>::display() const
+void Stack<Typ>::DisplayStack() const
 {
-	Node<Typ>* temp = top;
+	Node<Typ>* temp = top->head;
 
 	while (temp != NULL)
 	{
@@ -78,4 +81,12 @@ void Stack<Typ>::display() const
 		temp = temp->next;
 	}
 	cout << endl;
+}
+
+template<typename Typ>
+Stack<Typ>& Stack<Typ>::operator = (const Stack<Typ>& stack)
+{
+	delete this->top;
+	this->top = new List<Typ>(*stack.top);
+	return *this;
 }

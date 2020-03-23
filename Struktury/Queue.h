@@ -10,15 +10,23 @@ private:
 	List<Typ>* queue;
 public:
 	Queue();
+	Queue(const Queue<Typ>* Queue);
 	~Queue();
 	void enqueue(const Typ& newElement);
 	Typ dequeue();
+	Queue<Typ>& operator = (const Queue<Typ>& queue);
 };
 
 template<typename Typ>
 Queue<Typ>::Queue()
 {
 	queue = new List<Typ>();
+}
+
+template<typename Typ>
+Queue<Typ>::Queue(const Queue<Typ>* Queue)
+{
+	this->queue = new List<Typ>(Queue->queue);
 }
 
 template<typename Typ>
@@ -48,7 +56,7 @@ Typ Queue<Typ>::dequeue()
 	}
 	else
 	{
-		throw out_of_range("Kolejka nie istnieje");
+		throw std::out_of_range("Kolejka nie istnieje");
 	}
 }
 
@@ -57,4 +65,12 @@ template<typename Typ>
 void Queue<Typ>::enqueue(const Typ& newElement)
 {
 	queue->pushBack(newElement);
+}
+
+template<typename Typ>
+Queue<Typ>& Queue<Typ>::operator = (const Queue<Typ>& Queue)
+{
+	delete this->queue;
+	this->queue = new List<Typ>(*Queue.queue);
+	return *this;
 }

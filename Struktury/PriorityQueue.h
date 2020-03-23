@@ -10,15 +10,23 @@ private:
 	List<Typ>* queue;
 public:
 	PriorityQueue();
+	PriorityQueue(const PriorityQueue<Typ>* PriorityQueue);
 	~PriorityQueue();
 	void enqueue(const Typ& newElement, int priority);
 	Typ dequeue();
+	PriorityQueue<Typ>& operator = (const PriorityQueue<Typ>& PriorityQueue);
 };
 
 template<typename Typ>
 PriorityQueue<Typ>::PriorityQueue()
 {
 	queue = new List<Typ>();
+}
+
+template<typename Typ>
+PriorityQueue<Typ>::PriorityQueue(const PriorityQueue<Typ>* PriorityQueue)
+{
+	this->queue = new List<Typ>(PriorityQueue->queue);
 }
 
 template<typename Typ>
@@ -78,4 +86,12 @@ Typ PriorityQueue<Typ>::dequeue()
 	{
 		throw out_of_range("Kolejka nie istnieje");
 	}
+}
+
+template<class Typ>
+PriorityQueue<Typ>& PriorityQueue<Typ>::operator = (const PriorityQueue<Typ>& PriorityQueue)
+{
+	delete this->queue;
+	this->queue = new List<Typ>(*PriorityQueue);
+	return *this;
 }
