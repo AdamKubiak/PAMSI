@@ -71,6 +71,6 @@ template<typename Typ>
 Queue<Typ>& Queue<Typ>::operator = (const Queue<Typ>& Queue)
 {
 	delete this->queue;
-	this->queue = new List<Typ>(*Queue.queue);
+	this->queue = new List<Typ>(Queue.queue);
 	return *this;
 }

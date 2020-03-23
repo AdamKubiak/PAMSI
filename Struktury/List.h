@@ -115,6 +115,7 @@ List<Typ>::List()
 template<typename Typ>
 List<Typ>::List(const List<Typ>* list)
 {
+
 	Node<Typ>* ptr = list->head;
 	size = list->size;
 
@@ -127,14 +128,14 @@ List<Typ>::List(const List<Typ>* list)
 
 template<typename Typ>
 List<Typ>::~List() {
-	while (head != nullptr) {
+	while (head != NULL) {
 		Node<Typ>* temp = head;
 		head = head->next;
 		delete temp;
 	}
 	delete head;
 	this->size = 0;
-	cout << "Lista zostala usunieta" << endl;
+	//cout << "Lista zostala usunieta" << endl;
 }
 
 template<typename Typ>

@@ -5,110 +5,148 @@
 int main()
 {
 	cout << "---------------* LISTA *---------------" << endl;
-	List<int>* kontener = new List<int>();
-	List<int>* testoperator = new List<int>();
+	List<int>* Lista = new List<int>();
+	List<int>* ListaOP = new List<int>();
 
-	kontener->pushBack(1);
-	kontener->pushBack(2);
-	kontener->pushBack(3);
-	kontener->pushFront(5);
-	kontener->pushFront(3);
-	kontener->insert(3, 1);
-	(*kontener)[0] = 9;
-	kontener->remove(3);
-	kontener->DisplayList();
+	Lista->pushBack(1);
+	Lista->pushBack(2);
+	Lista->pushBack(3);
+	Lista->pushFront(5);
+	Lista->pushFront(3);
+	Lista->insert(3, 1);
+	(*Lista)[0] = 9;
+	Lista->remove(3);
+	Lista->DisplayList();
 	cout << endl;
 
 	
-	cout <<"Test operatora [] ..."<< (*kontener)[2] << endl;
+	cout <<"Test operatora [] ... "<< (*Lista)[2] << endl;
 
 	cout << "Test iteratora, konstruktora kopiujacegp i operatora '=': " << endl;
-	for (auto it = kontener->cbegin(); it != kontener->cend(); ++it)
+	for (auto it = Lista->cbegin(); it != Lista->cend(); ++it)
 		std::cout << *it << " ";
 		cout << endl;
 
-		List<int>* kopia = new List<int>(kontener);
+		List<int>* ListaKO = new List<int>(Lista);
 
-		for (auto it = kopia->cbegin(); it != kopia->cend(); ++it)
+		for (auto it = ListaKO->cbegin(); it != ListaKO->cend(); ++it)
 			std::cout << *it << " ";
 		cout << endl;
-		*testoperator = *kontener;
-		testoperator->DisplayList();
+		*ListaOP = *Lista;
+		ListaOP->DisplayList();
 		cout << endl;
 
 
-		delete kontener;
-		delete kopia;
-		delete testoperator;
-
-
+		delete Lista;
+		delete ListaOP;
+		delete ListaKO;
 		cout << endl;
 
 		cout << "---------------* STOS *----------------" << endl;
 
-		Stack<int>* stack = new Stack<int>();
-		Stack<int>* testopstack = new Stack<int>();
-		stack->push(1);
-		stack->push(2);
-		stack->push(3);
+		Stack<int>* Stos = new Stack<int>();
+		Stack<int>* StosOP = new Stack<int>();
 
-		stack->DisplayStack();
+		Stos->push(1);
+		Stos->push(2);
+		Stos->push(3);
 
-		std::cout << "pop: " << stack->pop() << std::endl;
-		stack->DisplayStack();
+		Stos->DisplayStack();
+
+		std::cout << "pop: " << Stos->pop() << std::endl;
+		Stos->DisplayStack();
 
 		cout << "Test konstruktora kopiujacegp i operatora '=': " << endl;
-		*testopstack = *stack;
-		testopstack->DisplayStack();
-		Stack<int>* kopiastack = new Stack<int>(stack);
-		kopiastack->DisplayStack();
-		delete testopstack;
-		//delete stack;
+		*StosOP = *Stos;
+		Stack<int>* StosKO = new Stack<int>(Stos);
+
+		StosOP->DisplayStack();
+		StosKO->DisplayStack();
+
+		delete StosOP;
+		delete Stos;
+		delete StosKO;
 
 		cout << "---------------* QUEUE *----------------" << endl;
 
 		Queue<int>* queue = new Queue<int>;
+		Queue<int>* QueueOP = new Queue<int>;
+		
 		queue->enqueue(1);
 		queue->enqueue(2);
 		queue->enqueue(3);
+
+		Queue<int>* QueueKO = new Queue<int>(queue);
+		*QueueOP = *queue;
+
 		for (int i = 0; i < 3; i++)
 		{
 			cout << queue->dequeue() << ' ';
 		}
 		cout << endl;
 
+		for (int i = 0; i < 3; i++)
+		{
+			cout << QueueKO->dequeue() << ' ';
+		}
+		cout << endl;
+
+
+		for (int i = 0; i < 3; i++)
+		{
+			cout << QueueOP->dequeue() << ' ';
+		}
+		cout << endl;
 		
 		queue->enqueue(1);
-	
+		QueueKO->enqueue(1);
+		QueueOP->enqueue(1);
 		delete queue;
+		delete QueueKO;
+		delete QueueOP;
+
 		
 
 		cout << "-----------* PriorityQueue *------------" << endl;
 
 		PriorityQueue<int>* Pqueue = new PriorityQueue<int>;
+		PriorityQueue<int>* PqueueKO = new PriorityQueue<int>;
+
 		Pqueue->enqueue(1, 1);
 		Pqueue->enqueue(1, 6);
 		Pqueue->enqueue(1, 1);
 		Pqueue->enqueue(5, 3);
 		Pqueue->enqueue(3, 2);
-		PriorityQueue<int>* Pqueue1 = new PriorityQueue<int>(Pqueue);
+
+		*PqueueKO = *Pqueue;
+		PriorityQueue<int>* PqueueOP = new PriorityQueue<int>(Pqueue);
 		for (int i = 0; i < 5; i++)
 		{
 			cout << Pqueue->dequeue() << ' ';
 		}
 		cout << endl;
+
 		cout << "Test konstruktora kopiujacego i operatora '='" << endl;
 
 		for (int i = 0; i < 5; i++)
 		{
-			cout << Pqueue1->dequeue() << ' ';
+			cout << PqueueOP->dequeue() << ' ';
+		}
+		cout << endl;
+
+		for (int i = 0; i < 5; i++)
+		{
+			cout << PqueueKO->dequeue() << ' ';
 		}
 		cout << endl;
 
 		
 		Pqueue->enqueue(3, 2);
-		Pqueue1->enqueue(3, 2);
+		PqueueOP->enqueue(3, 2);
+		PqueueKO->enqueue(3, 2);
 		delete Pqueue;
+		delete PqueueOP;
+		delete PqueueKO;
 
 
 	return 0;

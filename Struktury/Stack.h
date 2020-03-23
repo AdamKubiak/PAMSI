@@ -33,9 +33,15 @@ Stack<Typ>::Stack(Stack<Typ>* stack)
 template<typename Typ>
 Stack<Typ>::~Stack()
 {
-	delete top;
+	while (top->head != NULL)
+	{
+		Node<Typ>* next = top->head->next;
+		delete top->head;
+		top->head = next;
+	}
 	cout << "Stos zostal usuniety" << endl;
 }
+
 template<typename Typ>
 void Stack<Typ>::push(const Typ& newElement)
 {
@@ -87,6 +93,6 @@ template<typename Typ>
 Stack<Typ>& Stack<Typ>::operator = (const Stack<Typ>& stack)
 {
 	delete this->top;
-	this->top = new List<Typ>(*stack.top);
+	this->top = new List<Typ>(stack.top);
 	return *this;
 }

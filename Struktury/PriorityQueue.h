@@ -92,6 +92,6 @@ template<class Typ>
 PriorityQueue<Typ>& PriorityQueue<Typ>::operator = (const PriorityQueue<Typ>& PriorityQueue)
 {
 	delete this->queue;
-	this->queue = new List<Typ>(*PriorityQueue);
+	this->queue = new List<Typ>(PriorityQueue.queue);
 	return *this;
 }
