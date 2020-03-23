@@ -2,6 +2,8 @@
 #include "Stack.h"
 #include "Queue.h"
 #include "PriorityQueue.h"
+#include "Map.h"
+
 int main()
 {
 	cout << "---------------* LISTA *---------------" << endl;
@@ -147,6 +149,38 @@ int main()
 		delete Pqueue;
 		delete PqueueOP;
 		delete PqueueKO;
+
+		cout << "-----------* HASHMAP *------------" << endl;
+
+		Map<int, int>* mapINT = new Map<int, int>();
+		Map<string, int>* mapSTRING = new Map<string, int>();
+		
+
+		mapINT->insert(100, 1);
+		mapINT->insert(20, 2);
+
+		mapSTRING->insert("Adam", 3);
+		mapSTRING->insert("John", 4);
+
+		mapINT->DisplayHash();
+		mapSTRING->DisplayHash();
+
+		cout << "Test konstruktora kopiujacego i operatora '='" << endl;
+
+		Map<int, int>* mapINTKO = new Map<int, int>(mapINT);
+		Map<string, int>* mapSTRINGOP = new Map<string, int>();
+
+		*mapSTRINGOP = *mapSTRING;
+		mapINTKO->DisplayHash();
+		mapSTRINGOP->DisplayHash();
+
+		
+
+		delete mapINT;
+		delete mapSTRING;
+		delete mapINTKO;
+		delete mapSTRINGOP;
+
 
 
 	return 0;
