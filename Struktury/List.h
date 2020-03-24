@@ -205,28 +205,28 @@ template<typename Typ>
 void List<Typ>::remove(const Typ& element)
 {
 	Node<Typ>* node = head;
-	Node<Typ>* preNode = nullptr;
-	Node<Typ>* postNode = nullptr;
+	Node<Typ>* previousNODE = nullptr;
+	Node<Typ>* nextNODE = nullptr;
 	if (head != nullptr)
 	{
 		if (head->data == element)
 		{
-			postNode = head->next;
+			nextNODE = head->next;
 			delete head;
-			head = postNode;
+			head = nextNODE;
 		}
 		else
 		{
 			while (node->next != nullptr)
 			{
-				preNode = node;
+				previousNODE = node;
 				node = node->next;
 				if (node != nullptr && node->data == element)
 				{
-					postNode = node->next;
+					nextNODE = node->next;
 					delete node;
-					preNode->next = postNode;
-					node = preNode;
+					previousNODE->next = nextNODE;
+					node = previousNODE;
 				}
 			}
 		}
