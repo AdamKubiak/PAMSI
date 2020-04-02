@@ -1,95 +1,69 @@
-#include "Quick.h"
-#include <iostream>
+﻿#include <iostream>
 #include <chrono>
+#include "Quick.h"
+#include "Obsluga.h"
 
 using namespace std;
 using namespace std::chrono;
-#define TypDanych int
 
-
-
-
-template<typename Typ>
-Typ* createTab(int size)
-{
-	Typ* Tab = new Typ[size];
-
-	return Tab;
-}
-
-template<typename Typ>
-void deleteTab(Typ* Tab)
-{
-	delete[] Tab;
-}
-
-
-template<typename Typ>
-void fill_randomTab(Typ* Tab,int size)
-{
-	for (int i = 0; i < size; i++)
-		Tab[i] = rand();
-}
-
-template<typename Typ>
-bool check_sortedTab(Typ* Tab, int size)
-{
-
-	for (int i = 0; i < size - 1; i++)
-	{
-		if (Tab[i] > Tab[i + 1])
-		{
-			cout << "Array not sorted, something went wrong" << endl;
-			return false;
-			
-		}
-			
-	}
-	return true;
-}
-
-template<typename Typ>
-Typ* percentSort(Typ* Tab, double percent)
-{
-
-}
+#define DataType int
+#define number_ofTabs 100 //tutaj ustalamy ile chcemy kopii tablicy danego rozmiaru
+long Size[5] = { 10000, 50000, 100000, 500000, 1000000 }; //rozmiary tablic
+double Duration = 0;   //suma czasu pojedynczych operacji 
+double Percentage[6] = { 25.0 ,50.0 ,75.0 ,95.0 ,99.0, 99.7 };
 
 
 
 int main()
 {
-	int Size[5] = { 10000, 50000, 100000, 500000, 1000000 }; //rozmiary tablic
-	int number_ofTabs = 100; //tutaj ustalamy ile chcemy kopii tablicy danego rozmiaru
-	double Duration = 0; //suma czasu pojedynczych operacji 
-
-	for (int a : Size)
+	int choice = menu();
+	for (double b : Percentage)
 	{
-		TypDanych* Array = createTab<TypDanych>(a);// glowna tablica
-		
-		
-		for (int i = 0; i < number_ofTabs; i++)
+		cout << "Tablica posortowana wczesniej w " << b << " %" << endl;
+		for (int a : Size) //for-each, przypisuje do zmiennej a kolejno wartosci tablicy Size
 		{
-			
-			fill_randomTab<TypDanych>(Array, a);
+			//DataType* Array = new DataType[a];// glowna tablica
 
-			auto start = high_resolution_clock::now();
 
-			qckSort(Array, 0, a-1);
+			for (int i = 0; i < number_ofTabs; i++)
+			{
+				DataType* Array = NewArray<DataType>(a, b);
+				//fill_randomTab<DataType>(Array, a);
 
-			auto stop = high_resolution_clock::now();
 
-			if (check_sortedTab<TypDanych>(Array, a) == 1) {};
-			cout << i << '%'<< '\r';
-			
-			auto duration = duration_cast<milliseconds>(stop - start);
+				auto start = high_resolution_clock::now();
 
-			Duration += (double)duration.count();
+				switch (choice)
+				{
+				case 1:
+					quickSort(Array, 0, a - 1);
+					break;
+
+				case 2:
+					//tu bedzie mergesort
+					break;
+				case 3:
+					//tu bedzie introsort
+					break;
+				}
+
+				auto stop = high_resolution_clock::now();
+
+				if (check_sortedTab<DataType>(Array, a) == 1) {};
+				cout << i << '%' << '\r';
+
+				auto duration = duration_cast<milliseconds>(stop - start);
+
+				Duration += (double)duration.count();
+				delete[] Array;
+			}
+
+
+			cout << "Zostalo posortowane " << number_ofTabs << " tablic o rozmiarze " << a << " czas sortowania pojedynczej tablicy wynosi " << Duration / number_ofTabs << " ms" << endl;
+
+
+
 		}
-
-		cout << "Zostalo posortowane " << number_ofTabs << " tablic o rozmiarze " << a << " czas sortowania pojedynczej tablicy wynosi " << Duration/number_ofTabs << " ms"<< endl;
-
-		deleteTab<TypDanych>(Array);
-		
 	}
 	return 0;
 }
