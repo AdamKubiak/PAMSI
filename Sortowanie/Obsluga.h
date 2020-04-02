@@ -4,12 +4,7 @@ using namespace std;
 
 
 
-template<typename Typ>
-void fill_randomTab(Typ* Tab, int size)
-{
-	for (int i = 0; i < size; i++)
-		Tab[i] = rand();
-}
+
 
 template<typename Typ>
 bool check_sortedTab(Typ* Tab, int size)
@@ -28,27 +23,34 @@ bool check_sortedTab(Typ* Tab, int size)
 	return true;
 }
 
-template<typename Typ>
-Typ* percentSort(Typ* Tab, double percent)
-{
 
-}
 
 template<typename Typ>
 Typ* NewArray(int size, double percentage)
 {
 	Typ* Tab = new Typ[size];
 
-	for (int i = 0; i < size * percentage * 0.01; ++i)
+	if (percentage)
 	{
-		Tab[i] = i;
+		for (int i = 0; i < size * percentage * 0.01; ++i)
+		{
+			Tab[i] = i;
+		}
+
+		for (int i = int(size * percentage * 0.01); i < size; ++i)
+		{
+			Tab[i] = rand();
+		}
+		return Tab;
 	}
 
-	for (int i = int(size * percentage * 0.01); i < size; ++i)
+	if (!percentage)
 	{
-		Tab[i] = rand();
+		for (int i = 0; i < size; i++)
+			Tab[i] = rand();
+
+		return Tab;
 	}
-	return Tab;
 }
 
 int menu()
@@ -57,10 +59,14 @@ int menu()
 	bool check = false;
 	cout << "Wybierz algorytm sortowania wpisujac przypisana cyfre do danego algorytmu:" << endl;
 	cout << "1. Quicksort" << endl;
-	cout << "1. Mergesort" << endl;
-	cout << "1. Introsort" << endl;
+	cout << "2. Mergesort" << endl;
+	cout << "3. Introsort" << endl;
+	cout << "4. Konczy dzialanie programu" << endl;
 	cin >> Arg;
 	
+	if (Arg == 4)
+		return Arg;
+
 	while (cin.fail())
 	{
 		cout << "Blad wpisz ponownie" << endl;
