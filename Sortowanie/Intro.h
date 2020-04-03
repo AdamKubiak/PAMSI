@@ -3,8 +3,8 @@
 #include "Insertion.h"
 #include "Heap.h"
 #include "Quick.h"
-// start - first index of arr[] to start sorting
-// end - last index of arr[]
+
+
 template <typename T>
 void IntroSortProcedure(T* arr, int start, int end, int maxdepth) {
     int size = end - start + 1;

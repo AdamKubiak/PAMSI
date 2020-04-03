@@ -16,6 +16,7 @@ double Percentage[7] = {0, 25.0 ,50.0 ,75.0 ,95.0 ,99.0, 99.7 };
 
 
 
+
 int main()
 {
 	const int choice = 0;

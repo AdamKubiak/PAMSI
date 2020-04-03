@@ -1,7 +1,7 @@
 #pragma once
 #include "Quick.h"
-// start - index of arr[] to start sorting
-// end - last index of arr[]
+
+
 template <typename T>
 void InsertionSort(T* arr, int start, int end) {
     end++;

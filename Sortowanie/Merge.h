@@ -34,8 +34,8 @@ void Merge(T* arr, int start, int middle, int end) {
     delete[] temp;
 }
 
-// start - first index of arr[] to start sorting
-// end - last index of arr[]
+
+
 template <typename T>
 void MergeSort(T* arr, int start, int end) {
     if (start < end) {

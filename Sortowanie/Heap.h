@@ -16,8 +16,7 @@ void Heapify(T* arr, int size, int root) {
         Heapify(arr, size, largest);
     }
 }
-// start - index of arr[] to start sorting
-// end - last index of arr[]
+
 template <typename T>
 void HeapSort(T* arr, int start, int end) {
     ++end;

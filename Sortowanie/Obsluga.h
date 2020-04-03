@@ -6,8 +6,8 @@ using namespace std;
 
 
 
-template<typename Typ>
-bool check_sortedTab(Typ* Tab, int size)
+template<typename T>
+bool check_sortedTab(T* Tab, int size)
 {
 
 	for (int i = 0; i < size - 1; i++)
@@ -25,10 +25,10 @@ bool check_sortedTab(Typ* Tab, int size)
 
 
 
-template<typename Typ>
-Typ* NewArray(int size, double percentage)
+template<typename T>
+T* NewArray(int size, double percentage)
 {
-	Typ* Tab = new Typ[size];
+	T* Tab = new T[size];
 
 	if (percentage)
 	{
@@ -51,6 +51,7 @@ Typ* NewArray(int size, double percentage)
 
 		return Tab;
 	}
+	return 0;
 }
 
 int menu()

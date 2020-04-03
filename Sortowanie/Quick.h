@@ -28,8 +28,7 @@ int Partition(T* arr, int start, int end) {
     }
 }
 
-// start - first index of arr[] to start sorting
-// end - last index of arr[]
+
 template <typename T>
 void quickSort(T* arr, int start, int end) {
     if (start < end) {
