@@ -5,6 +5,7 @@
 #include "Intro.h"
 #include "Obsluga.h"
 
+
 using namespace std;
 using namespace std::chrono;
 
@@ -25,6 +26,7 @@ int main()
 	{
 		cout << endl;
 		const int choice = menu();
+		NameFile(choice);
 		for (double b : Percentage)
 		{
 			cout << endl;
@@ -32,7 +34,6 @@ int main()
 			cout << "------------------------------------" << endl;
 			for (int a : Size) //for-each, przypisuje do zmiennej a kolejno wartosci tablicy Size
 			{
-				//DataType* Array = new DataType[a];// glowna tablica
 
 				Duration = 0;
 				for (int i = 0; i < number_ofTabs; i++)
@@ -67,9 +68,9 @@ int main()
 					Duration += (double)duration.count();
 					delete[] Array;
 				}
+				writeToFile(b, a, Duration / number_ofTabs * 0.001);
 
-
-				cout << "Zostalo posortowane " << number_ofTabs << " tablic o rozmiarze " << a << " czas sortowania pojedynczej tablicy wynosi " << Duration / number_ofTabs << " ms" << endl;
+				cout << "Zostalo posortowane " << number_ofTabs << " tablic o rozmiarze " << a << " czas sortowania pojedynczej tablicy wynosi " << Duration / number_ofTabs* 0.001 << " s" << endl;
 
 
 

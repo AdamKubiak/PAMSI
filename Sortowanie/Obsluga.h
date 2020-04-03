@@ -1,9 +1,32 @@
 #pragma once
+#include <fstream>
 using namespace std;
 
+ofstream _file;
 
+void writeToFile(double percentage,int size, double duration)
+{
+	_file << percentage << ";" << size << ";" << duration << std::endl;
+}
 
-
+void NameFile(int a)
+{
+	switch (a)
+	{
+	case 1:
+		_file.open("quick.txt", std::ios::out);
+		_file << "percentage sorted; size ; time \n";
+		break;
+	case 2:
+		_file.open("merge.txt", std::ios::out);
+		_file << "percentage sorted; size ; time \n";
+		break;
+	case 3:
+		_file.open("intro.txt", std::ios::out);
+		_file << "percentage sorted; size ; time \n";
+		break;
+	}
+}
 
 
 template<typename T>
@@ -66,7 +89,7 @@ int menu()
 	cin >> Arg;
 	
 	if (Arg == 4)
-		return Arg;
+		exit(1);
 
 	while (cin.fail())
 	{
