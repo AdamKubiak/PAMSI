@@ -57,12 +57,12 @@ T* NewArray(int size, double percentage)
 	{
 		for (int i = 0; i < size * percentage * 0.01; ++i)
 		{
-			Tab[i] = i;
+			Tab[i] = T(i);
 		}
 
 		for (int i = int(size * percentage * 0.01); i < size; ++i)
 		{
-			Tab[i] = rand();
+			Tab[i] = T(rand());
 		}
 		return Tab;
 	}
@@ -70,7 +70,7 @@ T* NewArray(int size, double percentage)
 	if (!percentage)
 	{
 		for (int i = 0; i < size; i++)
-			Tab[i] = rand();
+			Tab[i] = T(rand());
 
 		return Tab;
 	}

@@ -1,7 +1,5 @@
 #pragma once
 
-#pragma once
-
 template <typename T>
 void Merge(T* arr, int start, int middle, int end) {
     T* temp = new T[end - start + 1];
