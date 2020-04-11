@@ -1,12 +1,25 @@
 #pragma once
 #include <fstream>
+#include "Quick.h"
 using namespace std;
 
-ofstream _file;
+ofstream quick, merge, intro;
 
-void writeToFile(double percentage,int size, double duration)
+void writeToFile(double percentage,int size, double duration, double min, double max, int a)
 {
-	_file << percentage << ";" << size << ";" << duration << std::endl;
+	
+	switch (a)
+	{
+	case 1:
+		quick << percentage << "; " << size << "; " << duration << "; " << max << "; " << min << std::endl;
+		break;
+	case 2:
+		merge << percentage << "; " << size << "; " << duration << "; " << max << "; " << min << std::endl;
+		break;
+	case 3:
+		intro << percentage << "; " << size << "; " << duration << "; " << max << "; " << min << std::endl;
+		break;
+	}
 }
 
 void NameFile(int a)
@@ -14,16 +27,16 @@ void NameFile(int a)
 	switch (a)
 	{
 	case 1:
-		_file.open("quick.txt", std::ios::out);
-		_file << "percentage sorted; size ; time \n";
+		quick.open("quick.txt", std::ios::out);
+		quick << "percentage sorted; size; average time; max; min \n";
 		break;
 	case 2:
-		_file.open("merge.txt", std::ios::out);
-		_file << "percentage sorted; size ; time \n";
+		merge.open("merge.txt", std::ios::out);
+		merge << "percentage sorted; size; average time; max; min \n";
 		break;
 	case 3:
-		_file.open("intro.txt", std::ios::out);
-		_file << "percentage sorted; size ; time \n";
+		intro.open("intro.txt", std::ios::out);
+		intro << "percentage sorted; size; average time; max; min \n";
 		break;
 	}
 }
@@ -38,7 +51,7 @@ bool check_sortedTab(T* Tab, int size)
 		if (Tab[i] > Tab[i + 1])
 		{
 			cout << "Array not sorted, something went wrong" << endl;
-			return false;
+			exit(1);
 
 		}
 
@@ -53,7 +66,7 @@ T* NewArray(int size, double percentage)
 {
 	T* Tab = new T[size];
 
-	if (percentage)
+	if (percentage!=100 && percentage != 0)
 	{
 		for (int i = 0; i < size * percentage * 0.01; ++i)
 		{
@@ -64,6 +77,15 @@ T* NewArray(int size, double percentage)
 		{
 			Tab[i] = T(rand());
 		}
+		return Tab;
+	}
+	
+	if (percentage == 100)
+	{
+		for (int i = 0; i < size; i++)
+			Tab[i] = T(rand());
+
+		ReverseQuickSort(Tab, 0, size - 1);
 		return Tab;
 	}
 
