@@ -10,7 +10,7 @@ protected:
 	int StartingVertex;
 
 	virtual void initializeAdjacencyList() = 0;
-	virtual void randomEdges(std::vector<std::pair<int, int>>& possibleEdges, int NumberOfEdges) = 0;
+	virtual void randomConection(std::vector<std::pair<int, int>>& possibleEdges, int NumberOfEdges) = 0;
 	//virtual void PrintGraph();
 
 public:

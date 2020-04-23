@@ -26,6 +26,6 @@ void Graph::GenerateRandomGraph(int size, double density)
     }
 
     initializeAdjacencyList();
-    randomEdges(possibleEdges, edgesNumber);
+    randomConection(possibleEdges, edgesNumber);
     //PrintGraph();
 }
