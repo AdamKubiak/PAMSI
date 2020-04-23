@@ -1,10 +1,7 @@
 #include "Graph.h"
 
-#include <climits>
 #include <iostream>
 #include <fstream>
-#include <sstream>
-#include <cstdlib>
 #include <ctime>
 
 Graph::Graph(int Vertices, int start) : NumberOfVertices(Vertices), StartingVertex(start)
@@ -28,7 +25,7 @@ void Graph::GenerateRandomGraph(int size, double density)
         }
     }
 
-    initializeAdjacency();
+    initializeAdjacencyList();
     randomEdges(possibleEdges, edgesNumber);
-
+    //PrintGraph();
 }

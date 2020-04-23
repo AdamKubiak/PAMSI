@@ -9,7 +9,7 @@ protected:
 	int NumberOfVertices;
 	int StartingVertex;
 
-	virtual void initializeAdjacency() = 0;
+	virtual void initializeAdjacencyList() = 0;
 	virtual void randomEdges(std::vector<std::pair<int, int>>& possibleEdges, int NumberOfEdges) = 0;
 	//virtual void PrintGraph();
 
