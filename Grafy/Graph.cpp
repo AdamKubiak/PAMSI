@@ -21,11 +21,10 @@ void Graph::GenerateRandomGraph(int size, double density)
     {
         for (int j = i + 1; j < NumberOfVertices; ++j)
         {
-            possibleEdges.emplace_back(std::make_pair(i, j));
+            possibleEdges.push_back(std::make_pair(i, j));
         }
     }
 
-    initializeAdjacencyList();
+    initializeAdjacency();
     randomConection(possibleEdges, edgesNumber);
-    //PrintGraph();
 }

@@ -150,10 +150,12 @@
     <ClCompile Include="Graph.cpp" />
     <ClCompile Include="ListGraph.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MatrixGraph.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Graph.h" />
     <ClInclude Include="ListGraph.h" />
+    <ClInclude Include="MatrixGraph.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

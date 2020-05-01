@@ -8,8 +8,10 @@ class Graph
 protected:
 	int NumberOfVertices;
 	int StartingVertex;
+	std::vector<int> previ;
+	std::vector<int> distances_;
 
-	virtual void initializeAdjacencyList() = 0;
+	virtual void initializeAdjacency() = 0;
 	virtual void randomConection(std::vector<std::pair<int, int>>& possibleEdges, int NumberOfEdges) = 0;
 	//virtual void PrintGraph();
 
@@ -19,7 +21,7 @@ public:
 	Graph() = default;
 	
 	//virtual void dijkstra() = 0;
-	void GenerateRandomGraph(int size, double density);
+	 void GenerateRandomGraph(int size, double density);
 
 	virtual ~Graph() {}
 };

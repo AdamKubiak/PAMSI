@@ -1,17 +1,15 @@
 #pragma once
-
 #include "Graph.h"
 
-
-class ListGraph : public Graph
+class MatrixGraph : public Graph
 {
 
-    std::vector<std::vector<std::pair<int, int>>> Adjacency;
+    std::vector<std::vector<int>> Adjacency;
     void initializeAdjacency(); //funkcja ma na celu wyczyscic vector oraz zarezerwowac miejsce na podany NumberOfVectors
     void randomConection(std::vector<std::pair<int, int>>& possibleEdges, int NumberOfEdges);
-   // void PrintGraph();
+    // void PrintGraph();
 public:
 
-    ListGraph(int Vertices, int start);
-    ListGraph() = default;
+    MatrixGraph(int Vertices, int start);
+    MatrixGraph() = default;
 };

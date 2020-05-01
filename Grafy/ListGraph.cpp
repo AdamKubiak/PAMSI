@@ -1,19 +1,22 @@
 #include "ListGraph.h"
+#include <queue>
+#include <algorithm>
+#include <climits>
 #include <iostream>
 
 ListGraph::ListGraph(int Vertices, int start)
     : Graph(Vertices, start)
 {
-    AdjacencyList.resize(Vertices);
+    Adjacency.resize(Vertices);
 
 }
 
-void ListGraph::initializeAdjacencyList()
+void ListGraph::initializeAdjacency()
 {
-    if (!AdjacencyList.empty())
-        AdjacencyList.clear();
+    if (!Adjacency.empty())
+        Adjacency.clear();
 
-    AdjacencyList.resize(NumberOfVertices);
+    Adjacency.resize(NumberOfVertices);
 }
 
 void ListGraph::randomConection(std::vector<std::pair<int, int>>& possibleEdges, int NumberOfEdges)
@@ -29,17 +32,17 @@ void ListGraph::randomConection(std::vector<std::pair<int, int>>& possibleEdges,
         std::pair<int, int> temp = possibleEdges[edgeIndex];
         auto toRemove = possibleEdges.begin() + edgeIndex;
         possibleEdges.erase(toRemove);
-        AdjacencyList[temp.first].emplace_back(std::make_pair(temp.second, weight));
-        AdjacencyList[temp.second].emplace_back(std::make_pair(temp.first, weight));
+        Adjacency[temp.first].push_back(std::make_pair(temp.second, weight));
+        Adjacency[temp.second].push_back(std::make_pair(temp.first, weight));
         
     }
 
     //std::cout << Adjacency.size();
 
-    for (int i=0;i<AdjacencyList.size();i++){
+    for (int i=0;i<Adjacency.size();i++){
         std::cout << i << " ->";
-      for (int j = 0; j < AdjacencyList[i].size(); j++) {
-          std::cout<< AdjacencyList[i][j].first << " "<<"("<< AdjacencyList[i][j].second << ") ";
+      for (int j = 0; j < Adjacency[i].size(); j++) {
+          std::cout<< Adjacency[i][j].first << " "<<"("<< Adjacency[i][j].second << ") ";
       }
       std::cout << std::endl;
     }
