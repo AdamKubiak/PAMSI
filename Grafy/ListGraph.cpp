@@ -5,7 +5,6 @@
 #include <iostream>
 
 ListGraph::ListGraph(int Vertices, int start)
-    : Graph(Vertices, start)
 {
     Adjacency.resize(Vertices);
 
@@ -45,5 +44,37 @@ void ListGraph::randomConection(std::vector<std::pair<int, int>>& possibleEdges,
           std::cout<< Adjacency[i][j].first << " "<<"("<< Adjacency[i][j].second << ") ";
       }
       std::cout << std::endl;
+    }
+}
+
+typedef std::pair<int, int> Pair;
+
+void ListGraph::dijkstra()
+{
+    std::priority_queue< Pair, std::vector<Pair>, std::greater<Pair> > pq;
+    pq.push(std::make_pair(0, StartingVertex));
+    Distances[StartingVertex] = 0;
+
+    while (!pq.empty())
+    {
+        int u = pq.top().second;
+        pq.pop();
+
+        if (!Adjacency[u].empty())
+        {
+            for (Pair neighbour : Adjacency[u])
+            {
+                int v = neighbour.first;
+                int weight = neighbour.second;
+
+                if (Distances[v] > Distances[u] + weight)
+                {
+                    Distances[v] = Distances[u] + weight;
+                    pq.push(std::make_pair(Distances[v], v));
+                    Previous[v] = u;
+                }
+            }
+        }
+
     }
 }

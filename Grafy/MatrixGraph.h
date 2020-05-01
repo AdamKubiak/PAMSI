@@ -11,5 +11,6 @@ class MatrixGraph : public Graph
 public:
 
     MatrixGraph(int Vertices, int start);
-    MatrixGraph() = default;
+    MatrixGraph() {};
+    void dijkstra() {};
 };

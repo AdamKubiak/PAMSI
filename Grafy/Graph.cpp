@@ -4,8 +4,7 @@
 #include <fstream>
 #include <ctime>
 
-Graph::Graph(int Vertices, int start) : NumberOfVertices(Vertices), StartingVertex(start)
-{}
+
 
 void Graph::GenerateRandomGraph(int size, double density)
 {
@@ -24,6 +23,16 @@ void Graph::GenerateRandomGraph(int size, double density)
             possibleEdges.push_back(std::make_pair(i, j));
         }
     }
+
+    if (!Previous.empty()) 
+        Previous.clear();
+
+   Previous.reserve(NumberOfVertices);
+
+    if (!Distances.empty())
+        Distances.clear();
+
+    Distances.resize(NumberOfVertices, 999);
 
     initializeAdjacency();
     randomConection(possibleEdges, edgesNumber);

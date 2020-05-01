@@ -13,5 +13,6 @@ class ListGraph : public Graph
 public:
 
     ListGraph(int Vertices, int start);
-    ListGraph() = default;
+    ListGraph() {};
+    void dijkstra();
 };

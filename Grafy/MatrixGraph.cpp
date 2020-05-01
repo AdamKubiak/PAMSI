@@ -3,7 +3,6 @@
 #include <climits>
 
 MatrixGraph::MatrixGraph(int Vertices, int start)
-    : Graph(Vertices, start)
 {
     Adjacency.resize(NumberOfVertices);
 
