@@ -54,7 +54,7 @@ void ListGraph::dijkstra()
     std::priority_queue< Pair, std::vector<Pair>, std::greater<Pair> > pq;
     pq.push(std::make_pair(0, StartingVertex));
     Distances[StartingVertex] = 0;
-
+   
     while (!pq.empty())
     {
         int u = pq.top().second;
@@ -70,11 +70,17 @@ void ListGraph::dijkstra()
                 if (Distances[v] > Distances[u] + weight)
                 {
                     Distances[v] = Distances[u] + weight;
+                    
                     pq.push(std::make_pair(Distances[v], v));
-                    Previous[v] = u;
+                    
+                   // Previous[v] = u;
+                    
                 }
             }
         }
 
     }
+    printf("Vertex   Distance from Source\n");
+    for (int i = 0; i < NumberOfVertices; ++i)
+        printf("%d \t\t %d\n", i, Distances[i]);
 }

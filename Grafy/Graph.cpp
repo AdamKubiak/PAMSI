@@ -32,7 +32,7 @@ void Graph::GenerateRandomGraph(int size, double density)
     if (!Distances.empty())
         Distances.clear();
 
-    Distances.resize(NumberOfVertices, 999);
+    Distances.resize(NumberOfVertices, 10000);
 
     initializeAdjacency();
     randomConection(possibleEdges, edgesNumber);
