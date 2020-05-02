@@ -24,15 +24,7 @@ void Graph::GenerateRandomGraph(int size, double density)
         }
     }
 
-    if (!Previous.empty()) 
-        Previous.clear();
-
-   Previous.reserve(NumberOfVertices);
-
-    if (!Distances.empty())
-        Distances.clear();
-
-    Distances.resize(NumberOfVertices, 10000);
+   
 
     initializeAdjacency();
     randomConection(possibleEdges, edgesNumber);

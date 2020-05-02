@@ -6,7 +6,15 @@
 
 ListGraph::ListGraph(int Vertices, int start)
 {
+    NumberOfVertices = Vertices;
     Adjacency.resize(Vertices);
+    StartingVertex = start;
+}
+
+void ListGraph::addVertex(int vertex, int neighbour, int weight)
+{
+    Adjacency[vertex].push_back(std::make_pair(neighbour, weight));
+    Adjacency[neighbour].push_back(std::make_pair(vertex, weight));
 
 }
 
@@ -16,6 +24,17 @@ void ListGraph::initializeAdjacency()
         Adjacency.clear();
 
     Adjacency.resize(NumberOfVertices);
+
+    if (!Previous.empty())
+        Previous.clear();
+
+    Previous.reserve(NumberOfVertices);
+
+    if (!Distances.empty())
+        Distances.clear();
+
+    Previous.resize(NumberOfVertices);
+    Distances.resize(NumberOfVertices, 999);
 }
 
 void ListGraph::randomConection(std::vector<std::pair<int, int>>& possibleEdges, int NumberOfEdges)

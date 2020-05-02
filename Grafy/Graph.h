@@ -14,6 +14,7 @@ protected:
 	virtual void initializeAdjacency() = 0;
 	virtual void randomConection(std::vector<std::pair<int, int>>& possibleEdges, int NumberOfEdges) = 0;
 	//virtual void PrintGraph();
+	void virtual addVertex(int vertex, int neighbour, int pathCost)=0;
 
 public:
 
