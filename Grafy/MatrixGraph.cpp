@@ -6,15 +6,23 @@
 #include <iostream>
 MatrixGraph::MatrixGraph(int Vertices, int start)
 {
+    NumberOfVertices = Vertices;
+    StartingVertex = start;
     Adjacency.resize(NumberOfVertices);
 
     for (int i = 0 ; i < NumberOfVertices ; i++)
     {
-        Adjacency[i].resize(NumberOfVertices);
+        Adjacency[i].resize(NumberOfVertices,999);
     }
-   
+    
 }
 
+void MatrixGraph::addVertex(int vertex, int neighbour, int weight)
+{
+    Adjacency[vertex][neighbour] = weight;
+    Adjacency[neighbour][vertex] = weight;
+
+}
 
 void MatrixGraph::initializeAdjacency()
 {
@@ -24,8 +32,19 @@ void MatrixGraph::initializeAdjacency()
     Adjacency.resize(NumberOfVertices);
     for (int i = 0; i < NumberOfVertices; i++)
     {
-        Adjacency[i].resize(NumberOfVertices);
+        Adjacency[i].resize(NumberOfVertices,999);
     }
+
+    if (!Previous.empty())
+        Previous.clear();
+
+    Previous.reserve(NumberOfVertices);
+
+    if (!Distances.empty())
+        Distances.clear();
+
+    Previous.resize(NumberOfVertices);
+    Distances.resize(NumberOfVertices, 999);
     
 }
 
@@ -53,7 +72,7 @@ void MatrixGraph::randomConection(std::vector<std::pair<int, int>>& possibleEdge
     }
 }
 
-/*typedef std::pair<int, int> Pair;
+typedef std::pair<int, int> Pair;
 void MatrixGraph::dijkstra()
 {
     std::priority_queue< Pair, std::vector<Pair>, std::greater<Pair> > pq;
@@ -64,28 +83,23 @@ void MatrixGraph::dijkstra()
     {
         int u = pq.top().second;
         pq.pop();
-
-        if (!Adjacency[u].empty())
+        if (!Adjacency.empty())
         {
-            for (int neighbour : Adjacency[u])
+            for (int neighbour = 0; neighbour < NumberOfVertices; neighbour++)
             {
-                int v = neighbour.first;
-                int weight = neighbour.second;
+                int v = neighbour;
+                int weight = Adjacency[u][neighbour];
+
 
                 if (Distances[v] > Distances[u] + weight)
                 {
                     Distances[v] = Distances[u] + weight;
-
                     pq.push(std::make_pair(Distances[v], v));
-
-                    // Previous[v] = u;
-
                 }
             }
         }
-
     }
     printf("Vertex   Distance from Source\n");
     for (int i = 0; i < NumberOfVertices; ++i)
         printf("%d \t\t %d\n", i, Distances[i]);
-}*/
+}
