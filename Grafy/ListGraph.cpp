@@ -3,6 +3,7 @@
 #include <algorithm>
 #include <climits>
 #include <iostream>
+#include <ctime>
 
 ListGraph::ListGraph(int Vertices, int start)
 {
@@ -33,7 +34,7 @@ void ListGraph::initializeAdjacency()
     if (!Distances.empty())
         Distances.clear();
 
-    Previous.resize(NumberOfVertices);
+    Previous.resize(NumberOfVertices,-1);
     Distances.resize(NumberOfVertices, 999);
 }
 
@@ -41,7 +42,6 @@ void ListGraph::randomConection(std::vector<std::pair<int, int>>& possibleEdges,
 {
     for (int i = 0; i < NumberOfEdges; ++i)
     {
-        
         int edgeIndex = std::rand() % possibleEdges.size();
         int weight = std::rand() % 10 +1;//dodaje jeden aby waga nie wynosi³a 0
        
@@ -92,14 +92,14 @@ void ListGraph::dijkstra()
                     
                     pq.push(std::make_pair(Distances[v], v));
                     
-                   // Previous[v] = u;
+                    Previous[v] = u;
                     
                 }
             }
         }
-
     }
+   
     printf("Vertex   Distance from Source\n");
-    for (int i = 0; i < NumberOfVertices; ++i)
-        printf("%d \t\t %d\n", i, Distances[i]);
+    for (int i = 0; i < NumberOfVertices; ++i) 
+        printf("%d \t\t %d\n", i, Distances[i]);  
 }

@@ -1,11 +1,16 @@
 ﻿#include "ListGraph.h"
 #include "MatrixGraph.h"
+#include "Test.h"
+#include "Obsluga.h"
 #include <iostream>
 
 int main()
 {
-    ListGraph* g = new ListGraph(14,0);
-    MatrixGraph* g2 = new MatrixGraph(14,0);
+    Test T;
+    ListGraph* g = new ListGraph(9,0);
+    MatrixGraph* g2 = new MatrixGraph(9,0);
+    //T.choice = menu();
+    //g->GenerateRandomGraph(250, 0.5);
     g->initializeAdjacency();
     g2->initializeAdjacency();
 
@@ -43,8 +48,6 @@ int main()
     g->dijkstra();
     std::cout << std::endl;
     g2->dijkstra();
-
-   std:: cout << "SMIGA!!!!" <<std:: endl;
 
     delete g;
     delete g2;

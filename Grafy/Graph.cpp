@@ -11,7 +11,7 @@ void Graph::GenerateRandomGraph(int size, double density)
     NumberOfVertices = size;
 
     srand(time(NULL));
-    StartingVertex = std::rand() % NumberOfVertices;
+    StartingVertex = 0;//std::rand() % NumberOfVertices;
 
     int edgesNumber = (int)(density * NumberOfVertices * (NumberOfVertices - 1)) / 2;
 
