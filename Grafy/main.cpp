@@ -9,7 +9,7 @@ int main()
     Test T;
     //ListGraph* g = new ListGraph(9,0);
     //MatrixGraph* g2 = new MatrixGraph(9,0);
-    T.choice = menu();
+    //T.choice = menu();
     T.TestDijkstra();
     
     ////g->GenerateRandomGraph(250, 0.5);

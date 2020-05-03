@@ -1,6 +1,7 @@
 #pragma once
 #include "ListGraph.h"
 #include "MatrixGraph.h"
+#include "Obsluga.h"
 #include <fstream>
 #include <chrono>
 #include <iostream>
@@ -10,14 +11,14 @@ class Test
 {
 private:
 	std::ofstream List, Matrix;
-	ListGraph* g = new ListGraph();
-	MatrixGraph* g2 = new MatrixGraph();
+	
 public:
 	int choice;
 	void writeToFile(int size, double density, double duration);
 	void openFile();
 	void TestDijkstra();
-	Test() {};
+	Test()
+	{};
 
 };
 
@@ -51,13 +52,17 @@ void Test::openFile()
 
 void Test::TestDijkstra()
 {
-	const int number_ofGraphs = 100; //tutaj ustalamy ile chcemy kopii tablicy danego rozmiaru
-	long size[5] = { 10, 30, 50, 70, 100 }; //rozmiary tablic
+	const int number_ofGraphs = 5; //tutaj ustalamy ile chcemy kopii tablicy danego rozmiaru
+	long size[5] = { 10, 50, 100, 500, 1000 }; //rozmiary tablic
 	double Duration = 0;   //suma czasu pojedynczych operacji 
 	double density[4] = {0.25 ,0.50 ,0.75 ,1 };
-	openFile();
+	
+
 	while (choice != 3)
 	{
+		choice = menu();
+		openFile();
+
 		for (double b : density)
 		{
 			std::cout << std::endl;
@@ -68,10 +73,14 @@ void Test::TestDijkstra()
 
 			for (int a : size) //for-each, przypisuje do zmiennej a kolejno wartosci tablicy Size
 			{
+				
 
 				Duration = 0;
 				for (int i = 0; i < number_ofGraphs; i++)
 				{
+					ListGraph* g = new ListGraph();
+					MatrixGraph* g2 = new MatrixGraph();
+
 					if (choice == 1)
 						g->GenerateRandomGraph(a, b);
 					else
@@ -93,7 +102,7 @@ void Test::TestDijkstra()
 
 					auto stop = high_resolution_clock::now();
 					//cout << i << '%' << '\r';
-
+					cout << i << '%' << '\r';
 
 					auto duration = duration_cast<milliseconds>(stop - start);
 
@@ -107,7 +116,7 @@ void Test::TestDijkstra()
 				}
 				writeToFile(a, b, Duration / number_ofGraphs * 0.001);
 
-				cout << "Algorytm Dijkstry zostal wykonany dla " << number_ofGraphs << " grafow z  " << a << "wierzcholkami" << " sredni czas wykonania algorytmu wynosi: " << Duration / number_ofGraphs * 0.001 << " s" << endl;
+				cout << "Algorytm Dijkstry zostal wykonany dla " << number_ofGraphs << " grafow z  " << a << " wierzcholkami" << " sredni czas wykonania algorytmu wynosi: " << Duration / number_ofGraphs * 0.001 << " s" << endl;
 
 
 
