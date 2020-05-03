@@ -57,13 +57,13 @@ void ListGraph::randomConection(std::vector<std::pair<int, int>>& possibleEdges,
 
     //std::cout << Adjacency.size();
 
-    for (int i=0;i<Adjacency.size();i++){
+    /*for (int i=0;i<Adjacency.size();i++){
         std::cout << i << " ->";
       for (int j = 0; j < Adjacency[i].size(); j++) {
           std::cout<< Adjacency[i][j].first << " "<<"("<< Adjacency[i][j].second << ") ";
       }
       std::cout << std::endl;
-    }
+    }*/
 }
 
 typedef std::pair<int, int> Pair;
@@ -92,14 +92,14 @@ void ListGraph::dijkstra()
                     
                     pq.push(std::make_pair(Distances[v], v));
                     
-                    Previous[v] = u;
+                    //Previous[v] = u;
                     
                 }
             }
         }
     }
    
-    printf("Vertex   Distance from Source\n");
+    /*printf("Vertex   Distance from Source\n");
     for (int i = 0; i < NumberOfVertices; ++i) 
-        printf("%d \t\t %d\n", i, Distances[i]);  
+        printf("%d \t\t %d\n", i, Distances[i]);  */
 }

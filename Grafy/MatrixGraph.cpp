@@ -63,13 +63,13 @@ void MatrixGraph::randomConection(std::vector<std::pair<int, int>>& possibleEdge
         Adjacency[temp.first][temp.second] = cost;
         Adjacency[temp.second][temp.first] = cost;
     }
-    for (int i = 0; i < Adjacency.size(); i++) {
+   /* for (int i = 0; i < Adjacency.size(); i++) {
         
         for (int j = 0; j < Adjacency[i].size(); j++) {
             std::cout << Adjacency[i][j] << " " ;
         }
         std::cout << std::endl;
-    }
+    }*/
 }
 
 typedef std::pair<int, int> Pair;
@@ -99,7 +99,7 @@ void MatrixGraph::dijkstra()
             }
         }
     }
-    printf("Vertex   Distance from Source\n");
+    /*printf("Vertex   Distance from Source\n");
     for (int i = 0; i < NumberOfVertices; ++i)
-        printf("%d \t\t %d\n", i, Distances[i]);
+        printf("%d \t\t %d\n", i, Distances[i]);*/
 }
