@@ -52,7 +52,7 @@ void Test::openFile()
 
 void Test::TestDijkstra()
 {
-	const int number_ofGraphs = 2; //tutaj ustalamy ile chcemy kopii tablicy danego rozmiaru
+	const int number_ofGraphs = 100; //tutaj ustalamy ile chcemy kopii tablicy danego rozmiaru
 	long size[5] = { 10, 50, 100, 150, 200 }; //rozmiary tablic
 	double Duration = 0;   //suma czasu pojedynczych operacji 
 	double density[4] = {0.25 ,0.50 ,0.75 ,1 };
