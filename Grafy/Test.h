@@ -17,7 +17,7 @@ public:
 	void writeToFile(int size, double density, double duration);
 	void openFile();
 	void TestDijkstra();
-	Test()
+	Test():choice(0)
 	{};
 
 };
@@ -52,14 +52,15 @@ void Test::openFile()
 
 void Test::TestDijkstra()
 {
-	const int number_ofGraphs = 5; //tutaj ustalamy ile chcemy kopii tablicy danego rozmiaru
-	long size[5] = { 10, 50, 100, 500, 1000 }; //rozmiary tablic
+	const int number_ofGraphs = 2; //tutaj ustalamy ile chcemy kopii tablicy danego rozmiaru
+	long size[5] = { 10, 50, 100, 150, 200 }; //rozmiary tablic
 	double Duration = 0;   //suma czasu pojedynczych operacji 
 	double density[4] = {0.25 ,0.50 ,0.75 ,1 };
 	
 
 	while (choice != 3)
 	{
+
 		choice = menu();
 		openFile();
 
@@ -83,8 +84,10 @@ void Test::TestDijkstra()
 
 					if (choice == 1)
 						g->GenerateRandomGraph(a, b);
-					else
+					if(choice == 2)
 						g2->GenerateRandomGraph(a, b);
+					
+					
 
 
 					auto start = high_resolution_clock::now();
@@ -101,10 +104,9 @@ void Test::TestDijkstra()
 					}
 
 					auto stop = high_resolution_clock::now();
-					//cout << i << '%' << '\r';
-					cout << i << '%' << '\r';
+					cout << i+1 << '%' << '\r';
 
-					auto duration = duration_cast<milliseconds>(stop - start);
+					auto duration = duration_cast<microseconds>(stop - start);
 
 
 
@@ -114,9 +116,9 @@ void Test::TestDijkstra()
 					else
 						delete g2;
 				}
-				writeToFile(a, b, Duration / number_ofGraphs * 0.001);
+				writeToFile(a, b, Duration / number_ofGraphs);
 
-				cout << "Algorytm Dijkstry zostal wykonany dla " << number_ofGraphs << " grafow z  " << a << " wierzcholkami" << " sredni czas wykonania algorytmu wynosi: " << Duration / number_ofGraphs * 0.001 << " s" << endl;
+				cout << "Algorytm Dijkstry zostal wykonany dla " << number_ofGraphs << " grafow z  " << a << " wierzcholkami" << " sredni czas wykonania algorytmu wynosi: " << Duration / number_ofGraphs << " microsec" << endl;
 
 
 

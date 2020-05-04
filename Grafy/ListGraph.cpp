@@ -1,9 +1,8 @@
 #include "ListGraph.h"
 #include <queue>
-#include <algorithm>
-#include <climits>
 #include <iostream>
 #include <ctime>
+#include <fstream>
 
 ListGraph::ListGraph(int Vertices, int start)
 {
@@ -15,8 +14,6 @@ ListGraph::ListGraph(int Vertices, int start)
 void ListGraph::addVertex(int vertex, int neighbour, int weight)
 {
     Adjacency[vertex].push_back(std::make_pair(neighbour, weight));
-    Adjacency[neighbour].push_back(std::make_pair(vertex, weight));
-
 }
 
 void ListGraph::initializeAdjacency()
@@ -35,7 +32,7 @@ void ListGraph::initializeAdjacency()
         Distances.clear();
 
     Previous.resize(NumberOfVertices,-1);
-    Distances.resize(NumberOfVertices, 999);
+    Distances.resize(NumberOfVertices, 10000);
 }
 
 void ListGraph::randomConection(std::vector<std::pair<int, int>>& possibleEdges, int NumberOfEdges)
@@ -48,10 +45,9 @@ void ListGraph::randomConection(std::vector<std::pair<int, int>>& possibleEdges,
 
 
         std::pair<int, int> temp = possibleEdges[edgeIndex];
-        auto toRemove = possibleEdges.begin() + edgeIndex;
-        possibleEdges.erase(toRemove);
-        Adjacency[temp.first].push_back(std::make_pair(temp.second, weight));
-        Adjacency[temp.second].push_back(std::make_pair(temp.first, weight));
+        auto removeIndex = possibleEdges.begin() + edgeIndex;
+        possibleEdges.erase(removeIndex);
+        addVertex(temp.first, temp.second, weight);
         
     }
 
@@ -92,14 +88,43 @@ void ListGraph::dijkstra()
                     
                     pq.push(std::make_pair(Distances[v], v));
                     
-                    //Previous[v] = u;
+                    Previous[v] = u;
                     
                 }
             }
         }
     }
-   
-    /*printf("Vertex   Distance from Source\n");
-    for (int i = 0; i < NumberOfVertices; ++i) 
-        printf("%d \t\t %d\n", i, Distances[i]);  */
+}
+
+void ListGraph::PrintDijkstra()
+{
+    std::cout << "vertex   distance from source" << std::endl;
+    for (int i = 0; i < NumberOfVertices; ++i)
+        std::cout << i << '\t' << '\t' << Distances[i] << std::endl;
+    for (int i = 0; i < NumberOfVertices; ++i)
+        std::cout << Previous[i] << ' ';
+    std::cout << std::endl;
+}
+
+void ListGraph::LoadFromFile(std::string filename) {
+    std::fstream file;
+    file.open(filename);
+    if (!file) {
+        std::cerr << "File not opened\n";
+        return;
+    }
+    file >> forFileNumberOfEdges;
+    file >> NumberOfVertices;
+    file >> StartingVertex;
+    this->initializeAdjacency();
+    int vertex;
+    int neighbour;
+    int weigth;
+    while (file >> vertex) {
+        file >> neighbour;
+        file >> weigth;
+        this->addVertex(vertex, neighbour, weigth);
+    }
+    file.close();
+    dijkstra();
 }

@@ -1,9 +1,8 @@
 #include "MatrixGraph.h"
 #include <iostream>
-#include <climits>
 #include <queue>
-#include <algorithm>
-#include <iostream>
+#include <fstream>
+
 MatrixGraph::MatrixGraph(int Vertices, int start)
 {
     NumberOfVertices = Vertices;
@@ -12,7 +11,7 @@ MatrixGraph::MatrixGraph(int Vertices, int start)
 
     for (int i = 0 ; i < NumberOfVertices ; i++)
     {
-        Adjacency[i].resize(NumberOfVertices,999);
+        Adjacency[i].resize(NumberOfVertices,10000);
     }
     
 }
@@ -20,8 +19,6 @@ MatrixGraph::MatrixGraph(int Vertices, int start)
 void MatrixGraph::addVertex(int vertex, int neighbour, int weight)
 {
     Adjacency[vertex][neighbour] = weight;
-    Adjacency[neighbour][vertex] = weight;
-
 }
 
 void MatrixGraph::initializeAdjacency()
@@ -32,19 +29,17 @@ void MatrixGraph::initializeAdjacency()
     Adjacency.resize(NumberOfVertices);
     for (int i = 0; i < NumberOfVertices; i++)
     {
-        Adjacency[i].resize(NumberOfVertices,999);
+        Adjacency[i].resize(NumberOfVertices,10000);
     }
 
     if (!Previous.empty())
         Previous.clear();
 
-    Previous.reserve(NumberOfVertices);
-
     if (!Distances.empty())
         Distances.clear();
 
-    Previous.resize(NumberOfVertices);
-    Distances.resize(NumberOfVertices, 999);
+    Previous.resize(NumberOfVertices,-1);
+    Distances.resize(NumberOfVertices, 10000);
     
 }
 
@@ -53,15 +48,14 @@ void MatrixGraph::randomConection(std::vector<std::pair<int, int>>& possibleEdge
 {
     for (int i = 0; i < NumberOfEdges; ++i)
     {
-        int cost = std::rand() % 9 + 1;
+        int weight = std::rand() % 9 + 1;
         int edgeIndex = std::rand() % possibleEdges.size();
 
 
         std::pair<int,int> temp = possibleEdges[edgeIndex];
-        auto toRemove = possibleEdges.begin() + edgeIndex;
-        possibleEdges.erase(toRemove);
-        Adjacency[temp.first][temp.second] = cost;
-        Adjacency[temp.second][temp.first] = cost;
+        auto removeIndex = possibleEdges.begin() + edgeIndex;
+        possibleEdges.erase(removeIndex);
+        addVertex(temp.first, temp.second, weight);
     }
    /* for (int i = 0; i < Adjacency.size(); i++) {
         
@@ -95,11 +89,44 @@ void MatrixGraph::dijkstra()
                 {
                     Distances[v] = Distances[u] + weight;
                     pq.push(std::make_pair(Distances[v], v));
+
+                    Previous[v] = u;
                 }
             }
         }
     }
-    /*printf("Vertex   Distance from Source\n");
+}
+
+void MatrixGraph::PrintDijkstra()
+{
+    std::cout << "vertex   distance from source" << std::endl;
     for (int i = 0; i < NumberOfVertices; ++i)
-        printf("%d \t\t %d\n", i, Distances[i]);*/
+        std::cout << i << '\t' << '\t' << Distances[i] << std::endl;
+    for (int i = 0; i < NumberOfVertices; ++i)
+        std::cout << Previous[i] << ' ';
+    std::cout << std::endl;
+}
+
+
+void MatrixGraph::LoadFromFile(std::string filename) {
+    std::fstream file;
+    file.open(filename);
+    if (!file) {
+        std::cerr << "File not opened\n";
+        return;
+    }
+    file >> forFileNumberOfEdges;
+    file >> NumberOfVertices;
+    file >> StartingVertex;
+    this->initializeAdjacency();
+    int vertex;
+    int neighbour;
+    int weigth;
+    while (file >> vertex) {
+        file >> neighbour;
+        file >> weigth;
+        this->addVertex(vertex, neighbour, weigth);
+    }
+    file.close();
+    dijkstra();
 }

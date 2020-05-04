@@ -1,7 +1,5 @@
 #include "Graph.h"
-
 #include <iostream>
-#include <fstream>
 #include <ctime>
 
 
@@ -10,22 +8,19 @@ void Graph::GenerateRandomGraph(int size, double density)
 {
     NumberOfVertices = size;
 
-    srand(time(NULL));
-    StartingVertex = 0;//std::rand() % NumberOfVertices;
+    //srand(time(NULL));
+    StartingVertex = std::rand() % NumberOfVertices;
+    initializeAdjacency();
 
-    int edgesNumber = (int)(density * NumberOfVertices * (NumberOfVertices - 1)) / 2;
+    int NumberOfEdges = (int)(density * NumberOfVertices * (NumberOfVertices - 1));
 
     std::vector<std::pair<int,int>> possibleEdges;
     for (int i = 0; i < NumberOfVertices; ++i)
     {
-        for (int j = i + 1; j < NumberOfVertices; ++j)
+        for (int j = 1; j < NumberOfVertices; ++j)
         {
             possibleEdges.push_back(std::make_pair(i, j));
         }
     }
-
-   
-
-    initializeAdjacency();
-    randomConection(possibleEdges, edgesNumber);
+randomConection(possibleEdges, NumberOfEdges);
 }

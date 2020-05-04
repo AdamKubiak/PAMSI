@@ -8,6 +8,7 @@ int menu()
 	std::cout << "Wybierz algorytm szukania najkrotszej sciezki wpisujac przypisana cyfre do algorytmu:" << std::endl;
 	std::cout << "1. Dijkstra dla Listy Sasiedztwa" << std::endl;
 	std::cout << "2. Dijkstra dla Macierzy Sasiedztwa" << std::endl;
+	//std::cout << "3. Wczytanie grafu z pliku" << std::endl;
 	std::cout << "3. Konczy dzialanie programu" << std::endl;
 	std::cin >> Arg;
 
