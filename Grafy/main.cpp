@@ -16,7 +16,7 @@ int main()
     while (choice == 1 || choice == 2)
     {
         std::cout << "******************************************" << std::endl;
-        std::cout << "1.Test algortymu" << std::endl << "2.Wczytywanie z pliku" << std::endl << "3.Kazdy inny input konczy program" << std::endl;
+        std::cout << "1.Pelna symulacja" << std::endl << "2.Wczytywanie z pliku" << std::endl << "3.Kazdy inny input konczy program" << std::endl;
         std::cin >> choice;
 
         while (std::cin.fail())
