@@ -45,10 +45,6 @@ void  AI::BestMove(Board& b) {
 
 int AI::minimax(Board& b, int depth, int isMaximizing)
 {
-    
-    srand(time(0));
-    if (b.CheckIfEmptyBoard())
-        return rand() % (b.GetSize() * b.GetSize());
    
     int result = b.CheckWinnerUltimate();
     if (result == 1)
