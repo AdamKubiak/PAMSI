@@ -73,7 +73,7 @@ void Player::move(Board &board)
 	std::cout << "Ruch gracza " << this->Sign << std::endl;
 	do
 	{
-		Inputs = inputs(InputX, InputY, board.GetSize());
+		Inputs = inputs(InputX, InputY, board.GetSize()-1);
 	} while (!board.CheckIfEmpty(Inputs.first, Inputs.second));
 
 	board.PutOnBoard(Inputs.first, Inputs.second, Sign);

@@ -18,12 +18,13 @@ public:
     ~Board() {};
     void printLines(int columns);
     void printNumbers(int columns);
-    bool CheckWinnerHorizontally();
-    bool CheckWinnerPerpendicularly();
-    bool CheckWinnerDiagonally();
-    bool CheckWinnerDiagonallyInverse();
+    int CheckWinnerHorizontally();
+    int CheckWinnerPerpendicularly();
+    int CheckWinnerDiagonally();
+    int CheckWinnerDiagonallyInverse();
+    bool CheckIfEmptyBoard();
     bool CheckFull();
-    bool CheckWinnerUltimate();
+    int CheckWinnerUltimate();
     std::vector<std::vector<char>> GetSquare();
 };
 
@@ -46,6 +47,25 @@ std::vector<std::vector<char>> Board::GetSquare()
     return Squares;
 }
 
+bool Board::CheckIfEmptyBoard()
+{
+    int counter = 0;
+    for (int i = 0; i < GetSize(); i++)
+    {
+        for (int j = 0; j < GetSize(); j++)
+        {
+            if (CheckIfEmpty(i, j))
+                counter++;
+            else
+                counter = 0;
+        }
+    }
+    if (counter == GetSize() * GetSize())
+        return true;
+    else
+        return false;
+}
+
 bool Board::CheckIfEmpty(int inputx, int inputy)
 {
     if (Squares[inputx][inputy] == ' ')
@@ -54,7 +74,7 @@ bool Board::CheckIfEmpty(int inputx, int inputy)
         return false;
 }
 
-bool Board::CheckWinnerHorizontally()
+int Board::CheckWinnerHorizontally()
 {
     int countX = 0;
     int countO = 0;
@@ -70,7 +90,7 @@ bool Board::CheckWinnerHorizontally()
             if (countX == MatchPoints)
             {
                 //std::cout << "Wygral gracz ze znakiem: X" << std::endl;
-                return true;
+                return 1;
             }
 
             if (Squares[i][j] == 'O')
@@ -81,7 +101,7 @@ bool Board::CheckWinnerHorizontally()
             if (countO == MatchPoints)
             {
                 //std::cout << "Wygral gracz ze znakiem: O" << std::endl;
-                return true;
+                return -1;
             }
         }
         countX = 0;
@@ -90,7 +110,7 @@ bool Board::CheckWinnerHorizontally()
     return false;
 }
 
-bool Board::CheckWinnerPerpendicularly()
+int Board::CheckWinnerPerpendicularly()
 {
     int countX = 0;
     int countO = 0;
@@ -107,7 +127,7 @@ bool Board::CheckWinnerPerpendicularly()
             if (countX == MatchPoints)
             {
                 //std::cout << "Wygral gracz ze znakiem: X" << std::endl;
-                return true;
+                return 1;
             }
 
             if (Squares[j][i] == 'O')
@@ -118,7 +138,7 @@ bool Board::CheckWinnerPerpendicularly()
             if (countO == MatchPoints)
             {
                 //std::cout << "Wygral gracz ze znakiem: O" << std::endl;
-                return true;
+                return -1;
             }
         }
         countX = 0;
@@ -128,7 +148,7 @@ bool Board::CheckWinnerPerpendicularly()
 
 }
 
-bool Board::CheckWinnerDiagonally()
+int Board::CheckWinnerDiagonally()
 {
     int countX = 0; int countO = 0;
     int j = -1;
@@ -145,7 +165,7 @@ bool Board::CheckWinnerDiagonally()
         if (countX == MatchPoints)
         {
             //std::cout << "Wygral gracz ze znakiem: X" << std::endl;
-            return true;
+            return 1;
         }
 
         if (Squares[j][i] == 'O')
@@ -156,14 +176,14 @@ bool Board::CheckWinnerDiagonally()
         if (countO == MatchPoints)
         {
             //std::cout << "Wygral gracz ze znakiem: O" << std::endl;
-            return true;
+            return -1;
         }
 
     }
     return false;
 }
 
-bool Board::CheckWinnerDiagonallyInverse()
+int Board::CheckWinnerDiagonallyInverse()
 {
     int countX = 0; int countO = 0;
     int j = BoardSize;
@@ -180,7 +200,7 @@ bool Board::CheckWinnerDiagonallyInverse()
         if (countX == MatchPoints)
         {
             //std::cout << "Wygral gracz ze znakiem: X" << std::endl;
-            return true;
+            return 1;
         }
 
         if (Squares[i][j] == 'O')
@@ -191,7 +211,7 @@ bool Board::CheckWinnerDiagonallyInverse()
         if (countO == MatchPoints)
         {
             //std::cout << "Wygral gracz ze znakiem: O" << std::endl;
-            return true;
+            return -1;
         }
 
     }
@@ -210,13 +230,16 @@ bool Board::CheckFull()
     return true;
 }
 
-bool Board::CheckWinnerUltimate()
+int Board::CheckWinnerUltimate()
 {
-    if (CheckWinnerDiagonally() == true || CheckWinnerDiagonallyInverse() == 1 || CheckWinnerHorizontally() == 1 || CheckWinnerPerpendicularly() == 1 || CheckFull() == 1)
+    if (CheckWinnerDiagonally() == 1 || CheckWinnerDiagonallyInverse() == 1 || CheckWinnerHorizontally() == 1 || CheckWinnerPerpendicularly() == 1)
     {
-        if (CheckFull())
-            //std::cout << "REMIS!!!" << std::endl;
-        return true;
+        return 1;
+    }
+    
+    else if (CheckWinnerDiagonally() == -1 || CheckWinnerDiagonallyInverse() == -1 || CheckWinnerHorizontally() == -1 || CheckWinnerPerpendicularly() == -1)
+    {
+        return -1;
     }
     else
         return false;

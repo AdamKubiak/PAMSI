@@ -12,7 +12,7 @@ int main()
 	AI p2('O');
 	
 
-	bool current = true;
+	bool current = false;
 
 
 	while (1)
@@ -22,9 +22,19 @@ int main()
 		if (current == true)
 			p1.move(b);
 		else
-			p2.move(b);
+			p2.BestMove(b);
 		system("CLS");
-		if (b.CheckWinnerUltimate())
+		if (b.CheckWinnerUltimate() == 1)
+		{
+			std::cout << "Player X won" << std::endl;
+			return 0;
+		}
+		else if (b.CheckWinnerUltimate() == -1)
+		{
+			std::cout << "Player O won" << std::endl;
+			return 0;
+		}
+		else if (b.CheckFull())
 			return 0;
 		if (current == true)
 			current = false;
