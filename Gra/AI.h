@@ -71,8 +71,7 @@ int AI::minimax(Board& b, int depth, int isMaximizing ,int alpha, int beta)
                     b.PutOnBoard(i, j, ' ');
                     alpha = std::max(best, alpha);
                     if (alpha >= beta) {
-                        j = b.GetSize();
-                        i = b.GetSize();
+                        break;
                     }
                 }
             }
@@ -90,8 +89,7 @@ int AI::minimax(Board& b, int depth, int isMaximizing ,int alpha, int beta)
                     
                     beta = std::min(beta, beta);
                     if (alpha >= beta) {
-                        j = b.GetSize();
-                        i = b.GetSize();
+                        break;
                     }
                 }
             }
