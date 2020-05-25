@@ -14,27 +14,31 @@ public:
 private:
     int minimax(Board& b, int depth, int isMaximizing);
 
-    //void move(Board& b);
+    void move(Board& b);
 
 };
 
 AI::AI(char sign) : Player(sign)
 {
 }
-
+ 
+void AI::move(Board& b)
+{
+    BestMove(b);
+}
 void  AI::BestMove(Board& b) {
     // AI to make its turn
     int bestScore = -INT_MAX;
     std::pair<int, int> move;
     for (int i = 0; i < b.GetSize(); i++) {
         for (int j = 0; j < b.GetSize(); j++) {
-            if (b.CheckIfEmpty(i,j)) {
+            if (b.CheckIfEmpty(i, j)) {
                 b.PutOnBoard(i, j, GetSign());
                 int score = minimax(b, 0, false);
                 b.PutOnBoard(i, j, ' ');
                 if (score > bestScore) {
                     bestScore = score;
-                    move = std::make_pair(i,j);
+                    move = std::make_pair(i, j);
                 }
             }
         }
@@ -45,16 +49,12 @@ void  AI::BestMove(Board& b) {
 
 int AI::minimax(Board& b, int depth, int isMaximizing)
 {
-    
- /*   srand(time(0));
-    if (b.CheckIfEmptyBoard())
-        return rand() % (b.GetSize() * b.GetSize());
-   */
+
     int result = b.CheckWinnerUltimate();
     if (result == 1)
-        return -1 ;
+        return -10+depth;
     else if (result == -1)
-        return 1 ;
+        return 10-depth;
     else if (b.CheckFull())
         return 0;
 
@@ -62,7 +62,7 @@ int AI::minimax(Board& b, int depth, int isMaximizing)
         int bestScore = -INT_MAX;
         for (int i = 0; i < b.GetSize(); i++) {
             for (int j = 0; j < b.GetSize(); j++) {
-                if (b.CheckIfEmpty(i,j)) {
+                if (b.CheckIfEmpty(i, j)) {
                     b.PutOnBoard(i, j, GetSign());
                     int score = minimax(b, depth + 1, false);
                     b.PutOnBoard(i, j, ' ');
@@ -76,7 +76,7 @@ int AI::minimax(Board& b, int depth, int isMaximizing)
         int bestScore = INT_MAX;
         for (int i = 0; i < b.GetSize(); i++) {
             for (int j = 0; j < b.GetSize(); j++) {
-                if (b.CheckIfEmpty(i,j)) {
+                if (b.CheckIfEmpty(i, j)) {
                     b.PutOnBoard(i, j, 'X');
                     int score = minimax(b, depth + 1, true);
                     b.PutOnBoard(i, j, ' ');

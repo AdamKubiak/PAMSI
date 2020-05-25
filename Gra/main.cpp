@@ -10,12 +10,12 @@ int main()
 	Board b(3,3);
 	Player p1('X');
 	AI p2('O');
-	
+	int k = 1;
 
-	bool current = false;
+	bool current = true;
 
 
-	while (1)
+	while (k == 1)
 	{
 		std::cout << "TIC TAC TOE!!!!" << std::endl;
 		b.PrintBoard();
@@ -27,19 +27,27 @@ int main()
 		if (b.CheckWinnerUltimate() == 1)
 		{
 			std::cout << "Player X won" << std::endl;
-			return 0;
+			b.PrintBoard();
+			std::cout <<std::endl<< "Chcesz zagrac jeszcze raz? 1-Tak;;; 0-Nie" << std::endl;
+			std::cin >> k;
 		}
 		else if (b.CheckWinnerUltimate() == -1)
 		{
 			std::cout << "Player O won" << std::endl;
-			return 0;
+			b.PrintBoard();
+			std::cout << std::endl << "Chcesz zagrac jeszcze raz? 1-Tak;;; 0-Nie" << std::endl;
+			std::cin >> k;
 		}
-		else if (b.CheckFull())
-			return 0;
+		else if (b.CheckFull()) {
+			std::cout << "TIE" << std::endl;
+			b.PrintBoard();
+			std::cout << std::endl << "Chcesz zagrac jeszcze raz? 1-Tak;;; 0-Nie" << std::endl;
+			std::cin >> k;
+		}
 		if (current == true)
 			current = false;
 		else
 			current = true;
 	}
-
+	return 0;
 }

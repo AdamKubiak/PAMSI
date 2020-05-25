@@ -13,6 +13,7 @@ public:
     Board(int size, int matchpoint);
 	void PrintBoard();
     int GetSize();
+    int GetMatchPoint();
     bool CheckIfEmpty(int inputx, int inputy);
     void PutOnBoard(int inputx, int inputy, char sign);
     ~Board() {};
@@ -45,6 +46,11 @@ int Board::GetSize()
 std::vector<std::vector<char>> Board::GetSquare()
 {
     return Squares;
+}
+
+int Board::GetMatchPoint()
+{
+    return MatchPoints;
 }
 
 bool Board::CheckIfEmptyBoard()
