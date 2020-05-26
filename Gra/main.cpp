@@ -50,12 +50,14 @@ int main()
 		else
 			current = true;
 	}*/
+	
 	int size = 0;
 	bool choice2 = 1;
 	int choice;
 	int matchPoint = 0;
 	bool playing = true;
 
+	
 	while (playing)
 	{
 		std::cout << "Wybierz tryb gry: "<< std::endl;
